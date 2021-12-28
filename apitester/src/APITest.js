@@ -1,48 +1,55 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Icon } from 'semantic-ui-react';
 import { useFormik } from 'formik';
+import QueryString from 'qs';
+import { useLocation } from 'react-router';
 import axios from 'axios';
-import './Main.css';
-
-// 저렇게 넣으면 화면
-// url : ~~~
-// header : ~~~
-// body : ~~~
-// 이렇게 어떤내용으로 전송되는지 적혀있고
-// 전송 버튼 누르면
-// response : ~~
+import './APITest.css';
 
 const APITest = () => {
-  const [response, setResponse] = useState('');
-  let club;
+  const [response, setResponse] = useState([]);
+  const location = useLocation();
+  const queryData = QueryString.parse(location.search, {
+    ignoreQueryPrefix: true,
+  });
 
+  console.log(queryData);
   const formik = useFormik({
     initialValues: {
-      url: '',
-      header: '',
-      body: '',
+      method: queryData.method,
+      url: queryData.url,
+      header: queryData.header,
+      body: queryData.body,
     },
     onSubmit: (values) => {
-      club = { ...values };
-      formik.resetForm();
+      //   formik.resetForm();
     },
   });
 
   const handleSaveButton = async (event) => {
     let response;
     try {
-      response = await axios.get(formik.url);
+      console.log(formik.values.url);
+      response = await axios.get(formik.values.url);
     } catch (e) {
       console.log(e);
     }
-    setResponse(response);
+    console.log(response.data);
+    setResponse(response.data);
   };
 
   return (
     <div>
-      <div className="body-box">
+      <div className="apitest-body">
         <form id="my-form" onSubmit={formik.handleSubmit}>
+          <input
+            id="method"
+            name="method"
+            type="string"
+            onChange={formik.handleChange}
+            value={formik.values.method}
+            placeholder="input method"
+          />
           <input
             id="url"
             name="url"
@@ -59,6 +66,14 @@ const APITest = () => {
             value={formik.values.header}
             placeholder="input header"
           />
+          <input
+            id="body"
+            name="body"
+            type="string"
+            onChange={formik.handleChange}
+            value={formik.values.body}
+            placeholder="input body"
+          />
         </form>
       </div>
       <button
@@ -69,7 +84,9 @@ const APITest = () => {
       >
         Save
       </button>
-      <div>{response}</div>
+      {response.map((e) => {
+        return <div>{e.nickname}</div>;
+      })}
     </div>
   );
 };
