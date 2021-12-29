@@ -100,12 +100,12 @@ const APITest = () => {
         default:
           console.log('no method');
       }
+      setIsResponse(true);
+      setResponse(response.data);
     } catch (e) {
       console.log(e);
+      alert(e);
     }
-    console.log(response);
-    setIsResponse(true);
-    setResponse(response.data);
   };
 
   return (
