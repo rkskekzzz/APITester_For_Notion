@@ -5,7 +5,16 @@
   border-radius: 15px;
 }
 
-.apitest-body form {
+.result-header-title {
+  width: 100%;
+  padding: 0 5px;
+  font-size: 20px;
+  font-weight: bold;
+  overflow: hidden;
+  word-break: break-all;
+}
+
+.apitest-form {
   display: flex;
   flex-direction: column;
   padding: 0 10px;
@@ -17,7 +26,38 @@
 }
 .button {
   margin: 0 10px;
-  width: 90%;
-  background: #333333;
-  border: 1px solid white;
+  width: 90px;
+  height: 40px;
+  background: #5b7ddb;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 0px solid #5b7ddb;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.back {
+  width: 70px;
+  background-color: #c4c4c4;
+  color: black;
+}
+
+.ba .button:hover {
+  cursor: pointer;
+}
+
+.apitest-body-utilbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.result-header {
+  padding: 0 5px 20px 0;
+  margin: 0 0 20px 0;
+  border-bottom: 1px solid #c4c4c4;
+}
+.result-body {
+  padding: 0 10px;
 }
