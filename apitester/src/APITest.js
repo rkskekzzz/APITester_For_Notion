@@ -29,9 +29,9 @@ const StyledBox = styled.div`
       case 'get':
         return `border-color: blue`;
       case 'post':
-        return `border-color: green`;
+        return `border-color: #53a158`;
       case 'put':
-        return `border-color: yellow`;
+        return `border-color: #f7dc4a`;
       case 'delete':
         return `border-color: red`;
       default:
@@ -40,10 +40,23 @@ const StyledBox = styled.div`
   }};
 `;
 
+const StyledBackground = styled.div`
+  height: 100%;
+  color: white;
+  padding: 10px;
+  ${({ mode }) => {
+    if (mode == 'dark') return `background: #2f3336`;
+    else return `background: white`;
+  }}
+`;
+
 const method = ['get', 'post', 'put', 'delete'];
 const theme = createTheme({
   typography: {
     fontSize: 12,
+  },
+  palette: {
+    mode: 'dark',
   },
 });
 
@@ -55,6 +68,7 @@ const APITest = () => {
     ignoreQueryPrefix: true,
   });
   const [seletedMethod, setSelectedMethod] = useState('get');
+  const [mode, setMode] = useState('white');
 
   const formik = useFormik({
     initialValues: {
@@ -110,10 +124,11 @@ const APITest = () => {
 
   useEffect(() => {
     if (queryData.method !== '') setSelectedMethod(queryData.method);
+    if (queryData.mode !== '') setMode(queryData.mode);
   }, []);
 
   return (
-    <div>
+    <StyledBackground mode={mode}>
       <StyledBox method={seletedMethod}>
         {isResponse && (
           <div>
@@ -130,11 +145,6 @@ const APITest = () => {
             </div>
             <div className="result-body">
               <ReactJson src={response} />
-              {/* {response.map((e) => {
-                console.log(e);
-                //   return <div>{e.nickname}</div>;
-                return <ReactJson src={e} />;
-              })} */}
             </div>
           </div>
         )}
@@ -143,9 +153,7 @@ const APITest = () => {
             <div className="apitest-body-utilbox">
               <FormControl sx={{ m: 1, minWidth: 90 }} size="small">
                 <InputLabel id="demo-simple-select-autowidth-label">
-                  <Typography theme={theme} color="">
-                    Method
-                  </Typography>
+                  <Typography theme={theme}>Method</Typography>
                 </InputLabel>
                 <Select
                   labelId="demo-simple-select-autowidth-label"
@@ -223,7 +231,7 @@ const APITest = () => {
           </div>
         )}
       </StyledBox>
-    </div>
+    </StyledBackground>
   );
 };
 
