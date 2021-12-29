@@ -50,15 +50,14 @@ const theme = createTheme({
 const APITest = () => {
   const [isResponse, setIsResponse] = useState(false);
   const [response, setResponse] = useState([]);
-  const [seletedMethod, setSelectedMethod] = React.useState([]);
   const location = useLocation();
   const queryData = QueryString.parse(location.search, {
     ignoreQueryPrefix: true,
   });
+  const [seletedMethod, setSelectedMethod] = React.useState(queryData.method);
 
   const formik = useFormik({
     initialValues: {
-      method: queryData.method,
       url: queryData.url,
       header: queryData.header,
       body: queryData.body,
@@ -80,7 +79,7 @@ const APITest = () => {
   const handleSaveButton = async (event) => {
     let response;
     let url = formik.values.url.replace(/['"]+/g, '');
-    let body = formik.values.body;
+    let body = JSON.parse(formik.values.body);
 
     try {
       switch (seletedMethod) {
@@ -89,6 +88,7 @@ const APITest = () => {
           response = await axios.get(url);
           break;
         case 'post':
+          console.log(body);
           response = await axios.post(url, body);
           break;
         case 'put':
