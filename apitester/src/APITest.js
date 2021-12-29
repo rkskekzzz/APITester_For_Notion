@@ -74,11 +74,13 @@ const APITest = () => {
 
   const handleBackButton = (event) => {
     setIsResponse(false);
+    setResponse([]);
   };
 
   const handleSaveButton = async (event) => {
     let response;
     let url = formik.values.url.replace(/['"]+/g, '');
+    let body = formik.values.body;
 
     try {
       switch (seletedMethod) {
@@ -87,7 +89,7 @@ const APITest = () => {
           response = await axios.get(url);
           break;
         case 'post':
-          response = await axios.post(url);
+          response = await axios.post(url, body);
           break;
         case 'put':
           response = await axios.put(url);
@@ -101,6 +103,7 @@ const APITest = () => {
     } catch (e) {
       console.log(e);
     }
+    console.log(response);
     setIsResponse(true);
     setResponse(response.data);
   };
