@@ -1,6 +1,7 @@
 import './App.css';
 import APITest from './APITest';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import * as React from 'react';
 
 function App() {
   return (
@@ -11,5 +12,4 @@ function App() {
     </BrowserRouter>
   );
 }
-
 export default App;
