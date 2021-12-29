@@ -125,11 +125,12 @@ const APITest = () => {
               </button>
             </div>
             <div className="result-body">
-              {response.map((e) => {
+              <ReactJson src={response} />
+              {/* {response.map((e) => {
                 console.log(e);
                 //   return <div>{e.nickname}</div>;
                 return <ReactJson src={e} />;
-              })}
+              })} */}
             </div>
           </div>
         )}
