@@ -27,13 +27,13 @@ const StyledBox = styled.div`
   ${({ method }) => {
     switch (method) {
       case 'get':
-        return `border-color: red`;
-      case 'post':
         return `border-color: blue`;
-      case 'put':
+      case 'post':
         return `border-color: green`;
+      case 'put':
+        return `border-color: yellow`;
       case 'delete':
-        return `border-color: black`;
+        return `border-color: red`;
       default:
         return `border-color: gray`;
     }
@@ -54,7 +54,7 @@ const APITest = () => {
   const queryData = QueryString.parse(location.search, {
     ignoreQueryPrefix: true,
   });
-  const [seletedMethod, setSelectedMethod] = React.useState(queryData.method);
+  const [seletedMethod, setSelectedMethod] = useState('get');
 
   const formik = useFormik({
     initialValues: {
@@ -108,6 +108,10 @@ const APITest = () => {
     }
   };
 
+  useEffect(() => {
+    if (queryData.method !== '') setSelectedMethod(queryData.method);
+  }, []);
+
   return (
     <div>
       <StyledBox method={seletedMethod}>
@@ -118,7 +122,7 @@ const APITest = () => {
               <button
                 className="button back"
                 variant="contained"
-                endIcon={<SendIcon />}
+                endicon={<SendIcon />}
                 onClick={handleBackButton}
               >
                 <span> Back </span>
@@ -146,19 +150,14 @@ const APITest = () => {
                 <Select
                   labelId="demo-simple-select-autowidth-label"
                   id="demo-simple-select-autowidth"
-                  value={seletedMethod}
+                  value={seletedMethod ?? ''}
                   onChange={handleChange}
                   autoWidth
                   label="Method"
                 >
-                  <MenuItem value="">
-                    <Typography theme={theme} color="">
-                      None
-                    </Typography>
-                  </MenuItem>
                   {method.map((e) => {
                     return (
-                      <MenuItem value={e}>
+                      <MenuItem value={e ?? ''} key={e}>
                         <Typography theme={theme} color="">
                           {e}
                         </Typography>
@@ -170,7 +169,7 @@ const APITest = () => {
               <button
                 className="button"
                 variant="contained"
-                endIcon={<SendIcon />}
+                endicon={<SendIcon />}
                 form="my-form"
                 type="submit"
                 onClick={handleSaveButton}
@@ -193,7 +192,7 @@ const APITest = () => {
                 name="url"
                 type="string"
                 onChange={formik.handleChange}
-                value={formik.values.url}
+                value={formik.values.url ?? ''}
                 placeholder="input url"
               />
               <TextField
@@ -203,10 +202,10 @@ const APITest = () => {
                 name="header"
                 type="string"
                 onChange={formik.handleChange}
-                value={formik.values.header}
+                value={formik.values.header ?? ''}
                 placeholder="input header"
               />
-              {seletedMethod != 'get' && (
+              {seletedMethod !== 'get' && (
                 <TextField
                   id="outlined-multiline-flexible body"
                   multiline
@@ -216,7 +215,7 @@ const APITest = () => {
                   name="body"
                   type="string"
                   onChange={formik.handleChange}
-                  value={formik.values.body}
+                  value={formik.values.body ?? ''}
                   placeholder="input body"
                 />
               )}
