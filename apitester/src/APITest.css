@@ -1,7 +1,23 @@
+.apitest-body {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 15px;
+}
+
 .apitest-body form {
-  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  padding: 0 10px;
+  gap: 15px;
+}
+
+.temp {
+  font-size: 0.5rem;
+}
+.button {
+  margin: 0 10px;
+  width: 90%;
+  background: #333333;
+  border: 1px solid white;
 }
