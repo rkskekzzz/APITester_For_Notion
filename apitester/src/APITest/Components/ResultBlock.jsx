@@ -37,6 +37,7 @@ const theme = createTheme({
   typography: {
     fontSize: 16,
     fontWeightBold: true,
+    color: 'textPrimary',
   },
 });
 
@@ -47,7 +48,8 @@ const ResultBlock = ({ handleBackButton, formik, response, mode }) => {
         <Typography
           className="result-header-title"
           color="textPrimary"
-          theme={theme}
+          variant="h6"
+          // theme={theme}
         >
           {formik.values.url}
         </Typography>
