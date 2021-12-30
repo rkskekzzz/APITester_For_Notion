@@ -5,7 +5,7 @@ import * as React from 'react';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.REACT_APP_BASE}>
       <Routes>
         <Route path="/" element={<APITest />} />
       </Routes>

@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  frontend:
+    image: petercha2000/apitester:0.0.1
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+      args:
+        PUBLIC_URL: $PUBLIC_URL
+        REACT_APP_BASE: $REACT_APP_BASE
+    platform: linux/amd64
+    restart: always
+    networks:
+      - web_gate
+
+networks:
+  web_gate:
+    driver: bridge
+    external: true
+
