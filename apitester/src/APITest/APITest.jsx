@@ -59,6 +59,15 @@ const lightTheme = createTheme({
   },
 });
 
+const jsonPrettier = (string) => {
+  try {
+    return JSON.stringify(JSON.parse(string),null,2)
+  } 
+  catch {
+    return string
+  }
+}
+
 /**
  * APITest
  */
@@ -78,7 +87,7 @@ const APITest = () => {
     initialValues: {
       url: queryData.url,
       header: queryData.header,
-      body: queryData.body,
+      body: jsonPrettier(queryData.body),
     },
     onSubmit: (values) => {
       //   formik.resetForm();
