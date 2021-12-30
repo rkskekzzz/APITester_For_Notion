@@ -28,16 +28,10 @@ const darkTheme = createTheme({
     mode: 'dark',
   },
 });
+
 const lightTheme = createTheme({
   palette: {
     mode: 'light',
-  },
-});
-const theme = createTheme({
-  typography: {
-    fontSize: 16,
-    fontWeightBold: true,
-    color: 'textPrimary',
   },
 });
 
@@ -49,7 +43,6 @@ const ResultBlock = ({ handleBackButton, formik, response, mode }) => {
           className="result-header-title"
           color="textPrimary"
           variant="h6"
-          // theme={theme}
         >
           {formik.values.url}
         </Typography>
