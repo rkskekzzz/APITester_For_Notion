@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
@@ -7,8 +8,10 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import SendIcon from '@mui/icons-material/Send';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { createTheme } from '@mui/material';
 import { Typography } from '@mui/material';
+import { IconButton } from '@mui/material';
 
 const method = ['get', 'post', 'put', 'delete'];
 const theme = createTheme({
@@ -64,16 +67,35 @@ const ContentsBlock = ({
             })}
           </Select>
         </FormControl>
-        <StyledButton
-          variant="contained"
-          endicon={<SendIcon />}
-          form="my-form"
-          type="submit"
-          onClick={handleSaveButton}
-        >
-          <span> Send </span>
-          <SendIcon fontSize="small" className="sendicon" />
-        </StyledButton>
+        <div className="button-box">
+          <CopyToClipboard
+            text={
+              'https://heyinsa.kr/apitester/' +
+              '?method=' +
+              selectedMethod +
+              '&url=' +
+              formik.values.url +
+              '&body=' +
+              formik.values.body +
+              '&header=' +
+              formik.values.header
+            }
+          >
+            <IconButton aria-label="copy">
+              <ContentCopyIcon />
+            </IconButton>
+          </CopyToClipboard>
+          <StyledButton
+            variant="contained"
+            endicon={<SendIcon />}
+            form="my-form"
+            type="submit"
+            onClick={handleSaveButton}
+          >
+            <span> Send </span>
+            <SendIcon fontSize="small" className="sendicon" />
+          </StyledButton>
+        </div>
       </div>
       <form
         className="apitest-form"
