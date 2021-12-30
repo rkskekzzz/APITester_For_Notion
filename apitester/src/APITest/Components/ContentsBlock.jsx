@@ -42,7 +42,7 @@ const ContentsBlock = ({
   formik,
 }) => {
   return (
-    <div>
+    <>
       <div className="apitest-body-utilbox">
         <FormControl sx={{ m: 1, minWidth: 90 }} size="small">
           <InputLabel id="demo-simple-select-autowidth-label">
@@ -139,7 +139,7 @@ const ContentsBlock = ({
           />
         )}
       </form>
-    </div>
+    </>
   );
 };
 
