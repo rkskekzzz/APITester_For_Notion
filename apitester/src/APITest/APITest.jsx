@@ -1,0 +1,157 @@
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router';
+import { ContentsBlock, ResultBlock } from './Components';
+
+import { useFormik } from 'formik';
+import QueryString from 'qs';
+import axios from 'axios';
+
+import { createTheme } from '@mui/material';
+import { ThemeProvider } from '@mui/material';
+
+import styled from 'styled-components';
+import './APITest.css';
+
+/**
+ * Styled-Components
+ */
+
+const StyledBox = styled.div`
+  margin: 20px;
+  padding: 20px;
+  border: 2px solid red;
+  border-radius: 15px;
+  ${({ method }) => {
+    switch (method) {
+      case 'get':
+        return `border-color: blue`;
+      case 'post':
+        return `border-color: #53a158`;
+      case 'put':
+        return `border-color: #f7dc4a`;
+      case 'delete':
+        return `border-color: red`;
+      default:
+        return `border-color: gray`;
+    }
+  }};
+`;
+
+const StyledBackground = styled.div`
+  height: 100%;
+  color: white;
+  padding: 10px;
+  ${({ mode }) => {
+    if (mode == 'dark') return `background: #2f3336`;
+    else return `background: white`;
+  }}
+`;
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+const lightTheme = createTheme({
+  palette: {
+    mode: 'light',
+  },
+});
+
+/**
+ * APITest
+ */
+const APITest = () => {
+  const location = useLocation();
+  const queryData = QueryString.parse(location.search, {
+    ignoreQueryPrefix: true,
+  });
+
+  const [isResponse, setIsResponse] = useState(false);
+  const [response, setResponse] = useState([]);
+  const [selectedMethod, setSelectedMethod] = useState('get');
+  const [mode, setMode] = useState('white');
+
+  const formik = useFormik({
+    initialValues: {
+      url: queryData.url,
+      header: queryData.header,
+      body: queryData.body,
+    },
+    onSubmit: (values) => {
+      //   formik.resetForm();
+    },
+  });
+
+  const handleChange = (event) => {
+    setSelectedMethod(event.target.value);
+  };
+
+  const handleBackButton = (event) => {
+    setIsResponse(false);
+    setResponse([]);
+  };
+
+  const handleSaveButton = async (event) => {
+    let response;
+    let url = formik.values.url.replace(/['"]+/g, '');
+    let body = JSON.parse(formik.values.body);
+
+    try {
+      switch (selectedMethod) {
+        case 'get':
+          console.log(url);
+          response = await axios.get(url);
+          break;
+        case 'post':
+          console.log(body);
+          response = await axios.post(url, body);
+          break;
+        case 'put':
+          response = await axios.put(url);
+          break;
+        case 'delete':
+          response = await axios.delete(url);
+          break;
+        default:
+          console.log('no method');
+      }
+      setIsResponse(true);
+      setResponse(response.data);
+    } catch (e) {
+      console.log(e);
+      alert(e);
+    }
+  };
+
+  useEffect(() => {
+    if (queryData.method !== '') setSelectedMethod(queryData.method);
+    if (queryData.mode !== '') setMode(queryData.mode);
+  }, []);
+
+  return (
+    <ThemeProvider theme={mode === 'dark' ? darkTheme : lightTheme}>
+      <StyledBackground mode={mode}>
+        <StyledBox method={selectedMethod}>
+          {isResponse && (
+            <ResultBlock
+              handleBackButton={handleBackButton}
+              formik={formik}
+              response={response}
+            />
+          )}
+          {!isResponse && (
+            <ContentsBlock
+              selectedMethod={selectedMethod}
+              handleChange={handleChange}
+              handleSaveButton={handleSaveButton}
+              formik={formik}
+            />
+          )}
+        </StyledBox>
+      </StyledBackground>
+    </ThemeProvider>
+  );
+};
+
+export default APITest;
