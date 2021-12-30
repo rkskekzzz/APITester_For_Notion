@@ -5,6 +5,7 @@ import { ContentsBlock, ResultBlock } from './Components';
 import { useFormik } from 'formik';
 import QueryString from 'qs';
 import axios from 'axios';
+import Loader from 'react-loader-spinner';
 
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@mui/material';
@@ -67,6 +68,7 @@ const APITest = () => {
     ignoreQueryPrefix: true,
   });
 
+  const [isLoading, setIsLoading] = useState(false);
   const [isResponse, setIsResponse] = useState(false);
   const [response, setResponse] = useState([]);
   const [selectedMethod, setSelectedMethod] = useState('get');
@@ -95,7 +97,7 @@ const APITest = () => {
   const handleSaveButton = async (event) => {
     let response;
     let url = formik.values.url.replace(/['"]+/g, '');
-    let body = JSON.parse(formik.values.body);
+    setIsLoading(true);
 
     try {
       switch (selectedMethod) {
@@ -104,7 +106,8 @@ const APITest = () => {
           response = await axios.get(url);
           break;
         case 'post':
-          console.log(body);
+          let body = JSON.parse(formik.values.body);
+
           response = await axios.post(url, body);
           break;
         case 'put':
@@ -114,14 +117,17 @@ const APITest = () => {
           response = await axios.delete(url);
           break;
         default:
+          setIsLoading(false);
           console.log('no method');
+          return;
       }
-      setIsResponse(true);
       setResponse(response.data);
     } catch (e) {
+      setResponse(e);
       console.log(e);
-      alert(e);
     }
+    setIsResponse(true);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -132,12 +138,18 @@ const APITest = () => {
   return (
     <ThemeProvider theme={mode === 'dark' ? darkTheme : lightTheme}>
       <StyledBackground mode={mode}>
+        {isLoading && (
+          <div className="loader">
+            <Loader type="Rings" color="#00BFFF" height={200} width={200} />
+          </div>
+        )}
         <StyledBox method={selectedMethod}>
           {isResponse && (
             <ResultBlock
               handleBackButton={handleBackButton}
               formik={formik}
               response={response}
+              mode={mode}
             />
           )}
           {!isResponse && (

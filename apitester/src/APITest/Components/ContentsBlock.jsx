@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
@@ -16,8 +17,23 @@ const theme = createTheme({
   },
 });
 
+const StyledButton = styled.button`
+  margin: 0 10px;
+  width: 90px;
+  height: 40px;
+  background: #5b7ddb;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 0px solid #5b7ddb;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  cursor: pointer;
+`;
+
 const ContentsBlock = ({
-  seletedMethod,
+  selectedMethod,
   handleChange,
   handleSaveButton,
   formik,
@@ -32,7 +48,7 @@ const ContentsBlock = ({
           <Select
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
-            value={seletedMethod ?? ''}
+            value={selectedMethod ?? ''}
             onChange={handleChange}
             autoWidth
             label="Method"
@@ -48,8 +64,7 @@ const ContentsBlock = ({
             })}
           </Select>
         </FormControl>
-        <button
-          className="button"
+        <StyledButton
           variant="contained"
           endicon={<SendIcon />}
           form="my-form"
@@ -58,7 +73,7 @@ const ContentsBlock = ({
         >
           <span> Send </span>
           <SendIcon fontSize="small" className="sendicon" />
-        </button>
+        </StyledButton>
       </div>
       <form
         className="apitest-form"
@@ -87,7 +102,7 @@ const ContentsBlock = ({
           value={formik.values.header ?? ''}
           placeholder="input header"
         />
-        {seletedMethod !== 'get' && (
+        {selectedMethod !== 'get' && (
           <TextField
             id="outlined-multiline-flexible body"
             multiline
