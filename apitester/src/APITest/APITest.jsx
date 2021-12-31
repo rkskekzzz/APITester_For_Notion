@@ -104,14 +104,14 @@ const APITest = () => {
   };
 
   const handleSaveButton = async (event) => {
-    let url = formik.values.url.replace(/['"]+/g, '');
-    if (url === '') {
+    if (!formik.values.url) {
       setError(true);
       setTimeout(() => {
         setError(false);
       }, 2000);
       return;
     }
+    let url = formik.values.url.replace(/['"]+/g, '');
     let body = formik.values.body ? JSON.parse(formik.values.body) : '';
     let headers = formik.values.header ? JSON.parse(formik.values.header) : '';
 
