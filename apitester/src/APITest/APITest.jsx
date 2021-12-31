@@ -61,12 +61,11 @@ const lightTheme = createTheme({
 
 const jsonPrettier = (string) => {
   try {
-    return JSON.stringify(JSON.parse(string),null,2)
-  } 
-  catch {
-    return string
+    return JSON.stringify(JSON.parse(string), null, 2);
+  } catch {
+    return string;
   }
-}
+};
 
 /**
  * APITest
@@ -106,13 +105,16 @@ const APITest = () => {
   const handleSaveButton = async (event) => {
     let response;
     let url = formik.values.url.replace(/['"]+/g, '');
+    let header = formik.values.header;
     setIsLoading(true);
 
     try {
       switch (selectedMethod) {
         case 'get':
           console.log(url);
-          response = await axios.get(url);
+          response = await axios.get(url, {
+            headers: { 'Content-Type': 'application/json' },
+          });
           break;
         case 'post':
           let body = JSON.parse(formik.values.body);
