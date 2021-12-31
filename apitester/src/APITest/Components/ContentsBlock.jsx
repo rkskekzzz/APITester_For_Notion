@@ -28,11 +28,15 @@ const StyledButton = styled.button`
   color: white;
   font-weight: bold;
   border-radius: 5px;
-  border: 0px solid #5b7ddb;
+  border: 0px solid white;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+
   cursor: pointer;
+  &: hover {
+    background: #6688dd;
+  }
 `;
 
 const ContentsBlock = ({
@@ -40,6 +44,7 @@ const ContentsBlock = ({
   handleChange,
   handleSaveButton,
   formik,
+  error,
 }) => {
   return (
     <>
@@ -103,6 +108,7 @@ const ContentsBlock = ({
         onSubmit={formik.handleSubmit}
       >
         <TextField
+          error={error ? true : false}
           id="outlined-multiline-flexible url"
           multiline
           maxRows={3}

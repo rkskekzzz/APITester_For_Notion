@@ -81,6 +81,7 @@ const APITest = () => {
   const [response, setResponse] = useState([]);
   const [selectedMethod, setSelectedMethod] = useState('get');
   const [mode, setMode] = useState('white');
+  const [error, setError] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -103,9 +104,18 @@ const APITest = () => {
   };
 
   const handleSaveButton = async (event) => {
-    let response;
     let url = formik.values.url.replace(/['"]+/g, '');
-    let header = formik.values.header;
+    if (url === '') {
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+      }, 2000);
+      return;
+    }
+    let body = formik.values.body ? JSON.parse(formik.values.body) : '';
+    let headers = formik.values.header ? JSON.parse(formik.values.header) : '';
+
+    let response;
     setIsLoading(true);
 
     try {
@@ -113,19 +123,23 @@ const APITest = () => {
         case 'get':
           console.log(url);
           response = await axios.get(url, {
-            headers: { 'Content-Type': 'application/json' },
+            headers: headers,
           });
           break;
         case 'post':
-          let body = JSON.parse(formik.values.body);
-
-          response = await axios.post(url, body);
+          response = await axios.post(url, body, {
+            headers: headers,
+          });
           break;
         case 'put':
-          response = await axios.put(url);
+          response = await axios.put(url, body, {
+            headers: headers,
+          });
           break;
         case 'delete':
-          response = await axios.delete(url);
+          response = await axios.delete(url, body, {
+            headers: headers,
+          });
           break;
         default:
           setIsLoading(false);
@@ -169,6 +183,7 @@ const APITest = () => {
               handleChange={handleChange}
               handleSaveButton={handleSaveButton}
               formik={formik}
+              error={error}
             />
           )}
         </StyledBox>
