@@ -49,7 +49,6 @@ const ContentsBlock = ({
   handleModeButton,
   formik,
   error,
-  mode,
 }) => {
   return (
     <>
@@ -91,9 +90,7 @@ const ContentsBlock = ({
               '&body=' +
               formik.values.body +
               '&header=' +
-              formik.values.header +
-              '&mode=' +
-              mode
+              formik.values.header
             ).replace(/[\n]+/g, '')}
           >
             <IconButton aria-label="copy">
@@ -140,7 +137,7 @@ const ContentsBlock = ({
           value={formik.values.header ?? ''}
           placeholder="input header"
         />
-        {selectedMethod !== 'get' && (
+        {selectedMethod !== 'GET' && (
           <TextField
             id="outlined-multiline-flexible body"
             multiline

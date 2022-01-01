@@ -24,13 +24,13 @@ const StyledBox = styled.div`
   border-radius: 15px;
   ${({ method }) => {
     switch (method) {
-      case 'get':
+      case 'GET':
         return `border-color: blue`;
-      case 'post':
+      case 'POST':
         return `border-color: #53a158`;
-      case 'put':
+      case 'PUT':
         return `border-color: #f7dc4a`;
-      case 'delete':
+      case 'DELETE':
         return `border-color: red`;
       default:
         return `border-color: gray`;
@@ -43,7 +43,7 @@ const StyledBackground = styled.div`
   color: white;
   padding: 10px;
   ${({ mode }) => {
-    if (mode == 'dark') return `background: #2f3336`;
+    if (mode === 'dark') return `background: #2f3336`;
     else return `background: white`;
   }}
 `;
@@ -124,23 +124,23 @@ const APITest = () => {
 
     try {
       switch (selectedMethod) {
-        case 'get':
+        case 'GET':
           console.log(url);
           response = await axios.get(url, {
             headers: headers,
           });
           break;
-        case 'post':
+        case 'POST':
           response = await axios.post(url, body, {
             headers: headers,
           });
           break;
-        case 'put':
+        case 'PUT':
           response = await axios.put(url, body, {
             headers: headers,
           });
           break;
-        case 'delete':
+        case 'DELETE':
           response = await axios.delete(url, body, {
             headers: headers,
           });
@@ -190,7 +190,6 @@ const APITest = () => {
               handleModeButton={handleModeButton}
               formik={formik}
               error={error}
-              mode={mode}
             />
           )}
         </StyledBox>
