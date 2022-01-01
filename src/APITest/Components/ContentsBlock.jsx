@@ -16,7 +16,7 @@ import { IconButton } from '@mui/material';
 
 import '../APITest.css';
 
-const method = ['get', 'post', 'put', 'delete'];
+const method = ['GET', 'POST', 'PUT', 'DELETE'];
 const theme = createTheme({
   typography: {
     fontSize: 12,
