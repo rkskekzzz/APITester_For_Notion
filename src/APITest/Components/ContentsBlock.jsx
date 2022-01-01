@@ -81,7 +81,7 @@ const ContentsBlock = ({
             <Brightness4Icon onClick={handleModeButton} />
           </IconButton>
           <CopyToClipboard
-            text={
+            text={(
               'https://heyinsa.kr/apitester/' +
               '?method=' +
               selectedMethod +
@@ -91,7 +91,7 @@ const ContentsBlock = ({
               formik.values.body +
               '&header=' +
               formik.values.header
-            }
+            ).replace(/[\n]+/g, '')}
           >
             <IconButton aria-label="copy">
               <ContentCopyIcon />

@@ -79,7 +79,7 @@ const APITest = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isResponse, setIsResponse] = useState(false);
   const [response, setResponse] = useState([]);
-  const [selectedMethod, setSelectedMethod] = useState('get');
+  const [selectedMethod, setSelectedMethod] = useState('GET');
   const [mode, setMode] = useState('light');
   const [error, setError] = useState(false);
 
@@ -160,7 +160,8 @@ const APITest = () => {
   };
 
   useEffect(() => {
-    if (queryData.method !== '') setSelectedMethod(queryData.method);
+    if (queryData.method !== '')
+      setSelectedMethod(queryData.method.toUpperCase());
     if (queryData.mode !== '') setMode(queryData.mode);
   }, []);
 
