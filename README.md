@@ -2,7 +2,7 @@
 
 APITester_For_Notion은 API 문서를 Notion으로 작성할 때, Notion 내에서 Embeding Block으로 사용할 수 있는 오픈소스 입니다. Embeding Block을 사용할 수 있는 플랫폼이라면, Notion이 아니라도 사용가능 합니다. 현재 제공되는 Theme은 Notion을 기준으로 제작되었습니다.
 
-**Easy to Use, Beautiful Design**
+**Easy to Use, Beautiful Design!**
 
 </br>
 </br>
