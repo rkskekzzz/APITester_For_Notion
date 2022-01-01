@@ -189,6 +189,7 @@ const APITest = () => {
               handleModeButton={handleModeButton}
               formik={formik}
               error={error}
+              mode={mode}
             />
           )}
         </StyledBox>
