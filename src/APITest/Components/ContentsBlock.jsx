@@ -49,6 +49,7 @@ const ContentsBlock = ({
   handleModeButton,
   formik,
   error,
+  mode,
 }) => {
   return (
     <>
@@ -90,7 +91,9 @@ const ContentsBlock = ({
               '&body=' +
               formik.values.body +
               '&header=' +
-              formik.values.header
+              formik.values.header +
+              '&mode=' +
+              mode
             ).replace(/[\n]+/g, '')}
           >
             <IconButton aria-label="copy">
