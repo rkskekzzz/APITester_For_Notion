@@ -22,7 +22,7 @@ FROM nginx:stable-alpine
 
 COPY --from=build /app/build  /var/www/html/static/
 
-COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY apitester/nginx/default.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
