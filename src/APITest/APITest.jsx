@@ -160,8 +160,9 @@ const APITest = () => {
   };
 
   useEffect(() => {
-    if (queryData.method !== '') setSelectedMethod(queryData.method);
-    if (queryData.mode !== undefined) setMode(queryData.mode.toUpperCase());
+    if (queryData.method !== undefined)
+      setSelectedMethod(queryData.method.toUpperCase());
+    if (queryData.mode !== undefined) setMode(queryData.mode);
   }, []);
 
   return (
