@@ -13,6 +13,8 @@ import { createTheme } from '@mui/material';
 import { Typography } from '@mui/material';
 import { IconButton } from '@mui/material';
 
+import '../APITest.css';
+
 const method = ['get', 'post', 'put', 'delete'];
 const theme = createTheme({
   typography: {
