@@ -27,7 +27,7 @@ jobs:
         context: .
         file: ./Dockerfile.prod
         push: true
-        tags: petercha2000/42club:0.0.1
+        tags: petercha2000/apitester:0.0.1
         build-args: |
             PUBLIC_URL=${{ secrets.PUBLIC_URL }}
             REACT_APP_BASE=${{ secrets.REACT_APP_BASE }}
