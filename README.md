@@ -13,6 +13,11 @@ APITester_For_Notion은 API 문서를 Notion으로 작성할 때, Notion 내에�
 
 [Demo Link](https://heyinsa.kr/apitester/?method=get&url=test&body=undefined&header=undefined)
 
+아래 링크에서 실제 사용 예시를 확인해 보세요!
+
+[Notion Link](https://80000coding.notion.site/DDIP-API-v1-631226749606492ea2a039d72b6eb0ee)
+
+
 </br>
 </br>
 
