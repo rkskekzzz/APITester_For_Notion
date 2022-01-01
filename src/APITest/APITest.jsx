@@ -80,7 +80,7 @@ const APITest = () => {
   const [isResponse, setIsResponse] = useState(false);
   const [response, setResponse] = useState([]);
   const [selectedMethod, setSelectedMethod] = useState('get');
-  const [mode, setMode] = useState('white');
+  const [mode, setMode] = useState('light');
   const [error, setError] = useState(false);
 
   const formik = useFormik({
@@ -94,6 +94,10 @@ const APITest = () => {
     },
   });
 
+  const handleModeButton = (event) => {
+    if (mode === 'dark') setMode('light');
+    else setMode('dark');
+  };
   const handleChange = (event) => {
     setSelectedMethod(event.target.value);
   };
@@ -182,6 +186,7 @@ const APITest = () => {
               selectedMethod={selectedMethod}
               handleChange={handleChange}
               handleSaveButton={handleSaveButton}
+              handleModeButton={handleModeButton}
               formik={formik}
               error={error}
             />

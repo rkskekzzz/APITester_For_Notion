@@ -9,6 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import SendIcon from '@mui/icons-material/Send';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
 import { createTheme } from '@mui/material';
 import { Typography } from '@mui/material';
 import { IconButton } from '@mui/material';
@@ -45,6 +46,7 @@ const ContentsBlock = ({
   selectedMethod,
   handleChange,
   handleSaveButton,
+  handleModeButton,
   formik,
   error,
 }) => {
@@ -75,6 +77,9 @@ const ContentsBlock = ({
           </Select>
         </FormControl>
         <div className="button-box">
+          <IconButton aria-label="mode">
+            <Brightness4Icon onClick={handleModeButton} />
+          </IconButton>
           <CopyToClipboard
             text={
               'https://heyinsa.kr/apitester/' +
