@@ -1,70 +1,98 @@
-# Getting Started with Create React App
+# APITester_For_Notion
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+APITester_For_Notion은 API 문서를 Notion으로 작성할 때, Notion 내에서 Embeding Block으로 사용할 수 있는 오픈소스 입니다. Embeding Block을 사용할 수 있는 플랫폼이라면, Notion이 아니라도 사용가능 합니다. 현재 제공되는 Theme은 Notion을 기준으로 제작되었습니다.
 
-## Available Scripts
+**Easy to Use, Beautiful Design**
 
-In the project directory, you can run:
+</br>
+</br>
 
-### `npm start`
+# Demo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+아래 링크에서 Demo 버전을 사용해 보세요!
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+[Demo Link](https://heyinsa.kr/apitester/?method=get&url=test&body=undefined&header=undefined)
 
-### `npm test`
+</br>
+</br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Feature
 
-### `npm run build`
+- Notion등 Embeding Block이 사용가능한 서비스 에서 사용가능 합니다.
+- QueryString을 사용해서 포멧이 적용된 블록을 다양하게 생성할 수 있습니다.
+- 오픈소스 라이브러리 입니다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+</br>
+</br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Usage
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+| props  | optional? | default | value?                                                                                                                                                                                  |
+| ------ | --------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| mode   | optional  | light   | 기본값은 라이트모드, mode 옵션을 통해서 APITester Block의 기본 테마를 지정할 수 있습니다.                                                                                               |
+| method | optional  | get     | 특정 API에서 사용하는 HTTP메소드를 APITester Block의 기본 메서드로 지정할 수 있습니다. 메서드가 설정되어 있지 않다면 Send버튼이 동작하지 않습니다. get, post, put, delete를 제공합니다. |
+| url    | -         | -       | 테스트를 진행하고 싶은 API를 입력합니다, URL이 입력되지 않으면 Send 버튼이 동작하지 않습니다.                                                                                           |
+| body   | optional  | -       | body로 넘길 json형식의 문자열을 입력합니다.                                                                                                                                             |
+| header | optional  | -       | header로 넘길 key=value형식의 문자열을 입력합니다.                                                                                                                                      |
 
-### `npm run eject`
+</br>
+</br>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Example
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+아래 iframe 코드의 src 부분에 넣을 url을 변경해서 원하는 형태의 블록을 생성할 수 있습니다.
+적용가능한 Props들을 활용하면 정해진 폼의 블록이 성생됩니다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```html
+<iframe
+  src="여기에 URL을 넣어주세요"
+  style="border:0px #ffffff none;"
+  name="APITester"
+  scrolling="no"
+  frameborder="1"
+  marginheight="0px"
+  marginwidth="0px"
+  height="100%"
+  width="600%"
+  allowfullscreen
+></iframe>
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## URL을 만드는 방법
 
-## Learn More
+iframe의 src에 넣을 url을 생성하는 방법입니다.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Method
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```text
+https://heyinsa.kr/apitester/?method=get
+https://heyinsa.kr/apitester/?method=post
+```
 
-### Code Splitting
+### URL
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+https://heyinsa.kr/apitester/?url=your_api_url
+```
 
-### Analyzing the Bundle Size
+### Theme
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+https://heyinsa.kr/apitester/?mode=dark
+https://heyinsa.kr/apitester/?mode=light
+```
 
-### Making a Progressive Web App
+### Multy Query
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
+https://heyinsa.kr/apitester/?mode=dark&method=get&url=your_api_url&header={"key":"valye"}
+```
 
-### Advanced Configuration
+</br>
+</br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+# Keywords
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- API
+- React
+- Notion
