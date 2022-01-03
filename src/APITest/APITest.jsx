@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router';
 import { ContentsBlock, ResultBlock } from './Components';
+import { jsonPrettier } from './Utils/jsonUtils';
+import { validUrl, validHeader, validBody } from './Utils/validUtils';
 
-import urlExist from 'url-exist';
 import { useFormik } from 'formik';
 import QueryString from 'qs';
 import axios from 'axios';
@@ -54,19 +55,12 @@ const darkTheme = createTheme({
     mode: 'dark',
   },
 });
+
 const lightTheme = createTheme({
   palette: {
     mode: 'light',
   },
 });
-
-const jsonPrettier = (string) => {
-  try {
-    return JSON.stringify(JSON.parse(string), null, 2);
-  } catch {
-    return string;
-  }
-};
 
 /**
  * APITest
@@ -90,9 +84,7 @@ const APITest = () => {
       header: jsonPrettier(queryData.header),
       body: jsonPrettier(queryData.body),
     },
-    onSubmit: (values) => {
-      //   formik.resetForm();
-    },
+    onSubmit: () => {}
   });
 
   const handleModeButton = (event) => {
@@ -109,38 +101,28 @@ const APITest = () => {
     setResponse({});
   };
 
+  const toggleError = (error) => { // url for header
+    const initError = { url: false, header: false }
+    const newError = { url: false, header: false }
+    newError[error] = true;
+    setError(newError);
+    setIsLoading(false);
+    setTimeout(() => setError(initError), 2000);
+  }
+
   const handleSendButton = async (event) => {
-    const url = formik.values.url;
-    let headers;
-    let body;
+    let url, headers, body;
     let response;
 
     setIsLoading(true);
 
     try {
-      let res = await urlExist(url);
-      if (!res) throw new Error('No URL');
+      url = validUrl(formik.values.url);
+      headers = validHeader(formik.values.header);
+      body = validBody(formik.values.body)
     } catch (e) {
-      setError({ url: true });
-      setIsLoading(false);
-      setTimeout(() => {
-        setError({ url: false });
-      }, 2000);
-      return;
+      return toggleError(e.message);
     }
-
-    try {
-      headers = formik.values.header ? JSON.parse(formik.values.header) : '';
-    } catch (e) {
-      setError({ header: true });
-      setIsLoading(false);
-      setTimeout(() => {
-        setError({ header: false });
-      }, 2000);
-      return;
-    }
-
-    body = formik.values.body ? JSON.parse(formik.values.body) : '';
 
     try {
       switch (selectedMethod) {
