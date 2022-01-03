@@ -9,7 +9,7 @@ export function validUrl(string) {
 export function validHeader(string) {
   let headers;
 
-  if (string === '')
+  if (!string)
     return '';
   try {
     headers = JSON.parse(string);
