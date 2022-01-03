@@ -160,18 +160,9 @@ const APITest = () => {
   };
 
   useEffect(() => {
-    console.log("localStorage.theme : ", localStorage.theme)
     if (queryData.method !== undefined)
       setSelectedMethod(queryData.method.toUpperCase());
     if (queryData.mode !== undefined) setMode(queryData.mode);
-    else if (localStorage.theme  !== undefined) {
-      try {
-        if (JSON.parse(localStorage.theme).mode === "dark") setMode("dark");
-      }
-      catch {
-        setMode("light");
-      }
-    }
   }, []);
 
   return (
