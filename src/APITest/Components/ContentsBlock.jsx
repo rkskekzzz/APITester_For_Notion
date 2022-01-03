@@ -51,6 +51,16 @@ const ContentsBlock = ({
   error,
   mode,
 }) => {
+  
+  function clipboardText() {
+    const method = `method=${selectedMethod}`
+    const url = formik.values.url ? `&url=${formik.values.url}` : '';
+    const body = formik.values.body ? `&body=${encodeURI(formik.values.body)}` : '';
+    const header = formik.values.header ? `&header=${encodeURI(formik.values.header)}` : '';
+
+    return `https://heyinsa.kr/apitester?${method}${url}${header}${body}&mode=${mode}`
+  }
+
   return (
     <>
       <div className="apitest-body-utilbox">
@@ -81,21 +91,7 @@ const ContentsBlock = ({
           <IconButton aria-label="mode">
             <Brightness4Icon onClick={handleModeButton} />
           </IconButton>
-          <CopyToClipboard
-            text={(
-              'https://heyinsa.kr/apitester/' +
-              '?method=' +
-              selectedMethod +
-              '&url=' +
-              formik.values.url +
-              '&body=' +
-              formik.values.body +
-              '&header=' +
-              formik.values.header +
-              '&mode=' +
-              mode
-            ).replace(/[\n]+/g, '')}
-          >
+          <CopyToClipboard text={clipboardText()}>
             <IconButton aria-label="copy">
               <ContentCopyIcon />
             </IconButton>
