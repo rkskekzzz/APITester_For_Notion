@@ -14,7 +14,6 @@ const StatusSpan = styled.span`
   font-size: 1.3rem;
   font-weight: bold;
   ${({ status }) => {
-    console.log(typeof status);
     switch (true) {
       case status >= 400:
         return `color: red`;
@@ -77,14 +76,25 @@ const ResultBlock = ({ handleBackButton, formik, response, mode }) => {
         </StyledBackButton>
       </div>
       <div className="result-body">
-        {mode === 'dark' ? (
-          <ReactJson
-            src={response.data}
-            theme="monokai"
-            style={{ background: '#303336' }}
-          />
+        {typeof response.data === 'object' ? (
+          mode === 'dark' ? (
+            <ReactJson
+              name={null}
+              src={response.data}
+              theme="monokai"
+              style={{ background: '#303336' }}
+            />
+          ) : (
+            <ReactJson name={null} src={response.data} />
+          )
         ) : (
-          <ReactJson src={response.data} />
+          <Typography
+            className="result-header-title"
+            color="textPrimary"
+            variant="h10"
+          >
+            {response.data}
+          </Typography>
         )}
       </div>
     </ThemeProvider>
