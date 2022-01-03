@@ -169,7 +169,7 @@ const APITest = () => {
           setIsLoading(false);
           return;
       }
-      setResponse(response.data);
+      setResponse(response);
     } catch (e) {
       setIsLoading(false);
       return;

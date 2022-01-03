@@ -6,6 +6,7 @@
 }
 
 .result-header-title {
+  height: 100%;
   width: 100%;
   padding: 0 5px;
   overflow: hidden;
@@ -33,8 +34,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-.result-header {
   padding: 0 5px 20px 0;
   margin: 0 0 20px 0;
   border-bottom: 1px solid #c4c4c4;
