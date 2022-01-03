@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router';
 import { ContentsBlock, ResultBlock } from './Components';
 
+import urlExist from 'url-exist';
 import { useFormik } from 'formik';
 import QueryString from 'qs';
 import axios from 'axios';
@@ -108,27 +109,46 @@ const APITest = () => {
   };
 
   const handleSaveButton = async (event) => {
-    if (!formik.values.url) {
+    const url = formik.values.url;
+    let headers;
+    let body;
+    let response;
+
+    setIsLoading(true);
+
+    try {
+      let res = await urlExist(url);
+      if (!res) throw new Error('No URL');
+    } catch (e) {
       setError(true);
+      setIsLoading(false);
       setTimeout(() => {
         setError(false);
       }, 2000);
       return;
     }
-    let url = formik.values.url.replace(/['"]+/g, '');
-    let body = formik.values.body ? JSON.parse(formik.values.body) : '';
-    let headers = formik.values.header ? JSON.parse(formik.values.header) : '';
 
-    let response;
-    setIsLoading(true);
+    try {
+      body = formik.values.body ? JSON.parse(formik.values.body) : '';
+    } catch (e) {
+      alert('body is not JSON');
+      return;
+    }
+
+    try {
+      headers = formik.values.header ? JSON.parse(formik.values.header) : '';
+    } catch (e) {
+      alert('header are not JSON');
+      return;
+    }
 
     try {
       switch (selectedMethod) {
         case 'GET':
-          console.log(url);
           response = await axios.get(url, {
             headers: headers,
           });
+          console.log(response);
           break;
         case 'POST':
           response = await axios.post(url, body, {
@@ -147,13 +167,12 @@ const APITest = () => {
           break;
         default:
           setIsLoading(false);
-          console.log('no method');
           return;
       }
       setResponse(response.data);
     } catch (e) {
-      setResponse(e);
-      console.log(e);
+      setIsLoading(false);
+      return;
     }
     setIsResponse(true);
     setIsLoading(false);
