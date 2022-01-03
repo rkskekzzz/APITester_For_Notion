@@ -49,7 +49,8 @@ APITester_For_Notion은 API 문서를 Notion으로 작성할 때, Notion 내에�
 
 ## URL을 만드는 방법
 
-url을 생성하는 방법입니다. 노션에 해당 url을 붙여넣은 후, 임베디 시켜주세요 :)
+url을 생성하는 방법입니다. 노션에 해당 url을 붙여넣은 후, 임베드 시켜주세요 :)
+![example](./asset/example.png)
 
 ### Method
 
