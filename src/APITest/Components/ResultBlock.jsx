@@ -13,7 +13,6 @@ import '../APITest.css';
 const StatusSpan = styled.span`
   font-size: 1.3rem;
   font-weight: bold;
-
   ${({ status }) => {
     console.log(typeof status);
     switch (true) {
