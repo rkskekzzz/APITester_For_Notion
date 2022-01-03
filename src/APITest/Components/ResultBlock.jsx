@@ -16,13 +16,12 @@ const StatusSpan = styled.span`
   ${({ status }) => {
     console.log(typeof status);
     switch (true) {
-      case status >= 200 && status < 300:
-        console.log('here');
-        return `color: green`;
-      case status < 400:
+      case status >= 400:
         return `color: red`;
-      case status < 500:
+      case status >= 300:
         return `color: blue`;
+      case status >= 200:
+        return `color: #53a158`; // green
       default:
         return `color: gray`;
     }
