@@ -82,7 +82,7 @@ const APITest = () => {
   const [response, setResponse] = useState([]);
   const [selectedMethod, setSelectedMethod] = useState('GET');
   const [mode, setMode] = useState('light');
-  const [error, setError] = useState(false);
+  const [error, setError] = useState({ url: false, header: false });
 
   const formik = useFormik({
     initialValues: {
@@ -120,27 +120,26 @@ const APITest = () => {
       let res = await urlExist(url);
       if (!res) throw new Error('No URL');
     } catch (e) {
-      setError(true);
+      setError({ url: true });
       setIsLoading(false);
       setTimeout(() => {
-        setError(false);
+        setError({ url: false });
       }, 2000);
-      return;
-    }
-
-    try {
-      body = formik.values.body ? JSON.parse(formik.values.body) : '';
-    } catch (e) {
-      alert('body is not JSON');
       return;
     }
 
     try {
       headers = formik.values.header ? JSON.parse(formik.values.header) : '';
     } catch (e) {
-      alert('header are not JSON');
+      setError({ header: true });
+      setIsLoading(false);
+      setTimeout(() => {
+        setError({ header: false });
+      }, 2000);
       return;
     }
+
+    body = formik.values.body ? JSON.parse(formik.values.body) : '';
 
     try {
       switch (selectedMethod) {

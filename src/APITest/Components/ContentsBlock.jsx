@@ -51,14 +51,17 @@ const ContentsBlock = ({
   error,
   mode,
 }) => {
-  
   function clipboardText() {
-    const method = `method=${selectedMethod}`
+    const method = `method=${selectedMethod}`;
     const url = formik.values.url ? `&url=${formik.values.url}` : '';
-    const body = formik.values.body ? `&body=${encodeURI(formik.values.body)}` : '';
-    const header = formik.values.header ? `&header=${encodeURI(formik.values.header)}` : '';
+    const body = formik.values.body
+      ? `&body=${encodeURI(formik.values.body)}`
+      : '';
+    const header = formik.values.header
+      ? `&header=${encodeURI(formik.values.header)}`
+      : '';
 
-    return `https://heyinsa.kr/apitester?${method}${url}${header}${body}&mode=${mode}`
+    return `https://heyinsa.kr/apitester?${method}${url}${header}${body}&mode=${mode}`;
   }
 
   return (
@@ -114,7 +117,7 @@ const ContentsBlock = ({
         onSubmit={formik.handleSubmit}
       >
         <TextField
-          error={error ? true : false}
+          error={error.url ? true : false}
           id="outlined-multiline-flexible url"
           multiline
           maxRows={3}
@@ -127,6 +130,7 @@ const ContentsBlock = ({
           placeholder="input url"
         />
         <TextField
+          error={error.header ? true : false}
           id="standard-basic header"
           multiline
           label="header"
