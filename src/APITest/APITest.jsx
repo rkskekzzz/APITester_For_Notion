@@ -78,8 +78,8 @@ const APITest = () => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
-  const [isResponse, setIsResponse] = useState(false);
-  const [response, setResponse] = useState([]);
+  const [isResponsed, setIsResponsed] = useState(false);
+  const [response, setResponse] = useState({});
   const [selectedMethod, setSelectedMethod] = useState('GET');
   const [mode, setMode] = useState('light');
   const [error, setError] = useState({ url: false, header: false });
@@ -99,16 +99,17 @@ const APITest = () => {
     if (mode === 'dark') setMode('light');
     else setMode('dark');
   };
-  const handleChange = (event) => {
+
+  const handleMethod = (event) => {
     setSelectedMethod(event.target.value);
   };
 
   const handleBackButton = (event) => {
-    setIsResponse(false);
-    setResponse([]);
+    setIsResponsed(false);
+    setResponse({});
   };
 
-  const handleSaveButton = async (event) => {
+  const handleSendButton = async (event) => {
     const url = formik.values.url;
     let headers;
     let body;
@@ -173,7 +174,7 @@ const APITest = () => {
       setIsLoading(false);
       return;
     }
-    setIsResponse(true);
+    setIsResponsed(true);
     setIsLoading(false);
   };
 
@@ -192,7 +193,7 @@ const APITest = () => {
           </div>
         )}
         <StyledBox method={selectedMethod}>
-          {isResponse && (
+          {isResponsed && (
             <ResultBlock
               handleBackButton={handleBackButton}
               formik={formik}
@@ -200,11 +201,11 @@ const APITest = () => {
               mode={mode}
             />
           )}
-          {!isResponse && (
+          {!isResponsed && (
             <ContentsBlock
               selectedMethod={selectedMethod}
-              handleChange={handleChange}
-              handleSaveButton={handleSaveButton}
+              handleMethod={handleMethod}
+              handleSendButton={handleSendButton}
               handleModeButton={handleModeButton}
               formik={formik}
               error={error}

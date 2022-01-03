@@ -44,8 +44,8 @@ const StyledButton = styled.button`
 
 const ContentsBlock = ({
   selectedMethod,
-  handleChange,
-  handleSaveButton,
+  handleMethod,
+  handleSendButton,
   handleModeButton,
   formik,
   error,
@@ -75,7 +75,7 @@ const ContentsBlock = ({
             labelId="demo-simple-select-autowidth-label"
             id="demo-simple-select-autowidth"
             value={selectedMethod ?? ''}
-            onChange={handleChange}
+            onChange={handleMethod}
             autoWidth
             label="Method"
           >
@@ -104,7 +104,7 @@ const ContentsBlock = ({
             endicon={<SendIcon />}
             form="my-form"
             type="submit"
-            onClick={handleSaveButton}
+            onClick={handleSendButton}
           >
             <span> Send </span>
             <SendIcon fontSize="small" className="sendicon" />
@@ -125,7 +125,7 @@ const ContentsBlock = ({
           variant="standard"
           name="url"
           type="string"
-          onChange={formik.handleChange}
+          onChange={formik.handleMethod}
           value={formik.values.url ?? ''}
           placeholder="input url"
         />
@@ -137,7 +137,7 @@ const ContentsBlock = ({
           variant="standard"
           name="header"
           type="string"
-          onChange={formik.handleChange}
+          onChange={formik.handleMethod}
           value={formik.values.header ?? ''}
           placeholder="input header"
         />
@@ -150,7 +150,7 @@ const ContentsBlock = ({
             variant="standard"
             name="body"
             type="string"
-            onChange={formik.handleChange}
+            onChange={formik.handleMethod}
             value={formik.values.body ?? ''}
             placeholder="input body"
           />
