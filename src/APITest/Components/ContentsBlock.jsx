@@ -125,7 +125,7 @@ const ContentsBlock = ({
           variant="standard"
           name="url"
           type="string"
-          onChange={formik.handleMethod}
+          onChange={formik.handleChange}
           value={formik.values.url ?? ''}
           placeholder="input url"
         />
@@ -137,7 +137,7 @@ const ContentsBlock = ({
           variant="standard"
           name="header"
           type="string"
-          onChange={formik.handleMethod}
+          onChange={formik.handleChange}
           value={formik.values.header ?? ''}
           placeholder="input header"
         />
@@ -150,7 +150,7 @@ const ContentsBlock = ({
             variant="standard"
             name="body"
             type="string"
-            onChange={formik.handleMethod}
+            onChange={formik.handleChange}
             value={formik.values.body ?? ''}
             placeholder="input body"
           />
