@@ -86,7 +86,7 @@ const APITest = () => {
   const formik = useFormik({
     initialValues: {
       url: queryData.url,
-      header: queryData.header,
+      header: jsonPrettier(queryData.header),
       body: jsonPrettier(queryData.body),
     },
     onSubmit: (values) => {
