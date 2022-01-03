@@ -132,6 +132,7 @@ const ContentsBlock = ({
         />
         <TextField
           id="standard-basic header"
+          multiline
           label="header"
           variant="standard"
           name="header"
