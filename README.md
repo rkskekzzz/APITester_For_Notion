@@ -45,27 +45,9 @@ APITester_For_Notion은 API 문서를 Notion으로 작성할 때, Notion 내에�
 
 # Example
 
-아래 iframe 코드의 src 부분에 넣을 url을 변경해서 원하는 형태의 블록을 생성할 수 있습니다.
-적용가능한 Props들을 활용하면 정해진 폼의 블록이 성생됩니다.
-
-```html
-<iframe
-  src="여기에 URL을 넣어주세요"
-  style="border:0px #ffffff none;"
-  name="APITester"
-  scrolling="no"
-  frameborder="1"
-  marginheight="0px"
-  marginwidth="0px"
-  height="100%"
-  width="600%"
-  allowfullscreen
-></iframe>
-```
-
 ## URL을 만드는 방법
 
-iframe의 src에 넣을 url을 생성하는 방법입니다.
+url을 생성하는 방법입니다. 노션에 해당 url을 붙여넣은 후, 임베디 시켜주세요 :)
 
 ### Method
 
