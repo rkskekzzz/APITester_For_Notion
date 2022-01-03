@@ -112,7 +112,7 @@ const APITest = () => {
 
   const handleSendButton = async (event) => {
     let url, headers, body;
-    let response;
+    let request;
 
     setIsLoading(true);
 
@@ -124,38 +124,43 @@ const APITest = () => {
       return toggleError(e.message);
     }
 
-    try {
-      switch (selectedMethod) {
-        case 'GET':
-          response = await axios.get(url, {
-            headers: headers,
-          });
-          console.log(response);
-          break;
-        case 'POST':
-          response = await axios.post(url, body, {
-            headers: headers,
-          });
-          break;
-        case 'PUT':
-          response = await axios.put(url, body, {
-            headers: headers,
-          });
-          break;
-        case 'DELETE':
-          response = await axios.delete(url, body, {
-            headers: headers,
-          });
-          break;
-        default:
-          setIsLoading(false);
-          return;
-      }
-      setResponse(response);
-    } catch (e) {
-      setIsLoading(false);
-      return;
+    switch (selectedMethod) {
+      case 'GET':
+        request = axios.get(url, {
+          headers: headers,
+        });
+        break;
+      case 'POST':
+        request = axios.post(url, body, {
+          headers: headers,
+        });
+        break;
+      case 'PUT':
+        request = axios.put(url, body, {
+          headers: headers,
+        });
+        break;
+      case 'DELETE':
+        request = axios.delete(url, body, {
+          headers: headers,
+        });
+        break;
+      default:
+        break;
     }
+
+    await request
+      .then(setResponse)
+      .catch(function (error) {
+        if (error.response) {
+          setResponse(error.response)
+        } else if (error.request) {
+          console.log('Request Error : ', error.request);
+        } else {
+          console.log('Axios Error : ', error.message);
+        }
+      });
+
     setIsResponsed(true);
     setIsLoading(false);
   };
