@@ -14,7 +14,7 @@ export const ColorBorderBox = styled.div`
       case 'POST':
         return `border-bottom: 1px solid #53a158`;
       case 'PUT':
-        return `border-bottom: 1px solid #f7dc4a`;
+        return `border-bottom: 1px solid #d9bc22`;
       case 'DELETE':
         return `border-bottom: 1px solid red`;
       default:

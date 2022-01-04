@@ -34,7 +34,7 @@ const StyledBox = styled.div`
       case 'POST':
         return `border-color: #53a158`;
       case 'PUT':
-        return `border-color: #f7dc4a`;
+        return `border-color: #d9bc22`;
       case 'DELETE':
         return `border-color: red`;
       default:
@@ -69,7 +69,6 @@ const lightTheme = createTheme({
  * APITest
  */
 const APITest = () => {
-  const present = 'onepage';
   const location = useLocation();
   const queryData = QueryString.parse(location.search, {
     ignoreQueryPrefix: true,
@@ -81,6 +80,7 @@ const APITest = () => {
   const [selectedMethod, setSelectedMethod] = useState('GET');
   const [mode, setMode] = useState('light');
   const [error, setError] = useState({ url: false, header: false });
+  const present = queryData.present ?? '';
 
   const formik = useFormik({
     initialValues: {

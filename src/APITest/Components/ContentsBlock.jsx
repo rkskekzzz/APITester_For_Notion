@@ -28,7 +28,6 @@ const StyledButton = styled.button`
   margin: 0 10px;
   width: 90px;
   height: 40px;
-  background: #5b7ddb;
   color: white;
   font-weight: bold;
   border-radius: 5px;
@@ -37,6 +36,20 @@ const StyledButton = styled.button`
   align-items: center;
   justify-content: space-evenly;
   cursor: pointer;
+  ${({ method }) => {
+    switch (method) {
+      case 'GET':
+        return `background-color: blue`;
+      case 'POST':
+        return `background-color: #53a158`;
+      case 'PUT':
+        return `background-color: #d9bc22`;
+      case 'DELETE':
+        return `background-color: red`;
+      default:
+        return `background-color: gray`;
+    }
+  }};
 
   &: hover {
     background: #6688dd;
@@ -101,18 +114,17 @@ const ContentsBlock = ({
               <ContentCopyIcon />
             </IconButton>
           </CopyToClipboard>
-          {present !== 'onepage' && (
-            <StyledButton
-              variant="contained"
-              endicon={<SendIcon />}
-              form="my-form"
-              type="submit"
-              onClick={handleSendButton}
-            >
-              <span> Send </span>
-              <SendIcon fontSize="small" className="sendicon" />
-            </StyledButton>
-          )}
+          <StyledButton
+            method={selectedMethod}
+            variant="contained"
+            endicon={<SendIcon />}
+            form="my-form"
+            type="submit"
+            onClick={handleSendButton}
+          >
+            <span> Send </span>
+            <SendIcon fontSize="small" className="sendicon" />
+          </StyledButton>
         </div>
       </ColorBorderBox>
       <form
