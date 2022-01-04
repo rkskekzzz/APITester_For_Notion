@@ -199,7 +199,6 @@ const APITest = () => {
               isLoading={isLoading}
             />
           )}
-
           {isResponsed && (
             <ResultBlock
               handleBackButton={handleBackButton}
