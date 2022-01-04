@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { ColorBorderBox } from './ColorBorderBox';
 
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
@@ -35,8 +36,8 @@ const StyledButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-
   cursor: pointer;
+
   &: hover {
     background: #6688dd;
   }
@@ -50,6 +51,7 @@ const ContentsBlock = ({
   formik,
   error,
   mode,
+  present,
 }) => {
   function clipboardText() {
     const method = `method=${selectedMethod}`;
@@ -66,7 +68,7 @@ const ContentsBlock = ({
 
   return (
     <>
-      <div className="apitest-body-utilbox">
+      <ColorBorderBox method={selectedMethod}>
         <FormControl sx={{ m: 1, minWidth: 90 }} size="small">
           <InputLabel id="demo-simple-select-autowidth-label">
             <Typography theme={theme}>Method</Typography>
@@ -99,18 +101,20 @@ const ContentsBlock = ({
               <ContentCopyIcon />
             </IconButton>
           </CopyToClipboard>
-          <StyledButton
-            variant="contained"
-            endicon={<SendIcon />}
-            form="my-form"
-            type="submit"
-            onClick={handleSendButton}
-          >
-            <span> Send </span>
-            <SendIcon fontSize="small" className="sendicon" />
-          </StyledButton>
+          {present !== 'onepage' && (
+            <StyledButton
+              variant="contained"
+              endicon={<SendIcon />}
+              form="my-form"
+              type="submit"
+              onClick={handleSendButton}
+            >
+              <span> Send </span>
+              <SendIcon fontSize="small" className="sendicon" />
+            </StyledButton>
+          )}
         </div>
-      </div>
+      </ColorBorderBox>
       <form
         className="apitest-form"
         id="my-form"

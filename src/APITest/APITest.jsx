@@ -24,6 +24,9 @@ const StyledBox = styled.div`
   padding: 20px;
   border: 2px solid red;
   border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
   ${({ method }) => {
     switch (method) {
       case 'GET':
@@ -66,6 +69,7 @@ const lightTheme = createTheme({
  * APITest
  */
 const APITest = () => {
+  const present = 'onepage';
   const location = useLocation();
   const queryData = QueryString.parse(location.search, {
     ignoreQueryPrefix: true,
@@ -84,7 +88,7 @@ const APITest = () => {
       header: jsonPrettier(queryData.header),
       body: jsonPrettier(queryData.body),
     },
-    onSubmit: () => {}
+    onSubmit: () => {},
   });
 
   const handleModeButton = (event) => {
@@ -101,14 +105,15 @@ const APITest = () => {
     setResponse({});
   };
 
-  const toggleError = (error) => { // url for header
-    const initError = { url: false, header: false }
-    const newError = { url: false, header: false }
+  const toggleError = (error) => {
+    // url for header
+    const initError = { url: false, header: false };
+    const newError = { url: false, header: false };
     newError[error] = true;
     setError(newError);
     setIsLoading(false);
     setTimeout(() => setError(initError), 2000);
-  }
+  };
 
   const handleSendButton = async (event) => {
     let url, headers, body;
@@ -119,7 +124,7 @@ const APITest = () => {
     try {
       url = validUrl(formik.values.url);
       headers = validHeader(formik.values.header);
-      body = validBody(formik.values.body)
+      body = validBody(formik.values.body);
     } catch (e) {
       return toggleError(e.message);
     }
@@ -149,17 +154,15 @@ const APITest = () => {
         break;
     }
 
-    await request
-      .then(setResponse)
-      .catch(function (error) {
-        if (error.response) {
-          setResponse(error.response)
-        } else if (error.request) {
-          console.log('Request Error : ', error.request);
-        } else {
-          console.log('Axios Error : ', error.message);
-        }
-      });
+    await request.then(setResponse).catch(function (error) {
+      if (error.response) {
+        setResponse(error.response);
+      } else if (error.request) {
+        console.log('Request Error : ', error.request);
+      } else {
+        console.log('Axios Error : ', error.message);
+      }
+    });
 
     setIsResponsed(true);
     setIsLoading(false);
@@ -169,6 +172,7 @@ const APITest = () => {
     if (queryData.method !== undefined)
       setSelectedMethod(queryData.method.toUpperCase());
     if (queryData.mode !== undefined) setMode(queryData.mode);
+    if (present === 'onepage') handleSendButton();
   }, []);
 
   return (
@@ -180,15 +184,7 @@ const APITest = () => {
           </div>
         )}
         <StyledBox method={selectedMethod}>
-          {isResponsed && (
-            <ResultBlock
-              handleBackButton={handleBackButton}
-              formik={formik}
-              response={response}
-              mode={mode}
-            />
-          )}
-          {!isResponsed && (
+          {(!isResponsed || present === 'onepage') && (
             <ContentsBlock
               selectedMethod={selectedMethod}
               handleMethod={handleMethod}
@@ -197,6 +193,17 @@ const APITest = () => {
               formik={formik}
               error={error}
               mode={mode}
+              present={present}
+            />
+          )}
+          {isResponsed && (
+            <ResultBlock
+              handleBackButton={handleBackButton}
+              formik={formik}
+              response={response}
+              mode={mode}
+              method={selectedMethod}
+              present={present}
             />
           )}
         </StyledBox>

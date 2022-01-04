@@ -3,10 +3,9 @@ import React from 'react';
 import styled from 'styled-components';
 import SendIcon from '@mui/icons-material/Send';
 import ReactJson from 'react-json-view';
-import { Typography } from '@mui/material';
 
-import { createTheme } from '@mui/material';
-import { ThemeProvider } from '@mui/material';
+import { Typography } from '@mui/material';
+import { ColorBorderBox } from './ColorBorderBox';
 
 import '../APITest.css';
 
@@ -42,22 +41,17 @@ const StyledBackButton = styled.button`
   cursor: pointer;
 `;
 
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
-
-const lightTheme = createTheme({
-  palette: {
-    mode: 'light',
-  },
-});
-
-const ResultBlock = ({ handleBackButton, formik, response, mode }) => {
+const ResultBlock = ({
+  handleBackButton,
+  formik,
+  response,
+  mode,
+  method,
+  present,
+}) => {
   return (
-    <ThemeProvider theme={mode === 'dark' ? darkTheme : lightTheme}>
-      <div className="apitest-body-utilbox">
+    <>
+      <ColorBorderBox method={method}>
         <StatusSpan status={response.status}>[{response.status}]</StatusSpan>
         <Typography
           className="result-header-title"
@@ -66,15 +60,16 @@ const ResultBlock = ({ handleBackButton, formik, response, mode }) => {
         >
           {formik.values.url}
         </Typography>
-
-        <StyledBackButton
-          variant="contained"
-          endicon={<SendIcon />}
-          onClick={handleBackButton}
-        >
-          <span> Back </span>
-        </StyledBackButton>
-      </div>
+        {present !== 'onepage' && (
+          <StyledBackButton
+            variant="contained"
+            endicon={<SendIcon />}
+            onClick={handleBackButton}
+          >
+            <span> Back </span>
+          </StyledBackButton>
+        )}
+      </ColorBorderBox>
       <div className="result-body">
         {typeof response.data === 'object' ? (
           mode === 'dark' ? (
@@ -97,7 +92,7 @@ const ResultBlock = ({ handleBackButton, formik, response, mode }) => {
           </Typography>
         )}
       </div>
-    </ThemeProvider>
+    </>
   );
 };
 
