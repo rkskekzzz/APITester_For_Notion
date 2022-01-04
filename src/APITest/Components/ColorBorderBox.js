@@ -4,21 +4,22 @@ export const ColorBorderBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 5px 10px 0;
+  border-radius: 5px;
+  padding: 5px;
 
   ${({ method }) => {
     console.log(method);
     switch (method) {
       case 'GET':
-        return `border-bottom: 1px solid blue`;
+        return `background:  #0000ff20`;
       case 'POST':
-        return `border-bottom: 1px solid #53a158`;
+        return `background: #53a15820`;
       case 'PUT':
-        return `border-bottom: 1px solid #d9bc22`;
+        return `background: #d9bc2220`;
       case 'DELETE':
-        return `border-bottom: 1px solid red`;
+        return `background: #ff000020`;
       default:
-        return `border-bottom: 1px solid gray`;
+        return `background: gray`;
     }
   }};
 `;
