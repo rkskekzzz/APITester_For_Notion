@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ColorBorderBox = styled.div`
+export const ContentHeaderBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;

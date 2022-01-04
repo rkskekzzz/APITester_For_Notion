@@ -5,7 +5,7 @@ import SendIcon from '@mui/icons-material/Send';
 import ReactJson from 'react-json-view';
 
 import { Typography } from '@mui/material';
-import { ColorBorderBox } from './ColorBorderBox';
+import { ContentHeaderBox } from './ContentHeaderBox';
 
 import '../APITest.css';
 
@@ -51,7 +51,7 @@ const ResultBlock = ({
 }) => {
   return (
     <>
-      <ColorBorderBox method={method}>
+      <ContentHeaderBox method={method}>
         <StatusSpan status={response.status}>[{response.status}]</StatusSpan>
         <Typography
           className="result-header-title"
@@ -69,7 +69,7 @@ const ResultBlock = ({
             <span> Back </span>
           </StyledBackButton>
         )}
-      </ColorBorderBox>
+      </ContentHeaderBox>
       <div className="result-body">
         {typeof response.data === 'object' ? (
           mode === 'dark' ? (

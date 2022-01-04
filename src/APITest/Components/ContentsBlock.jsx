@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { ColorBorderBox } from './ColorBorderBox';
+import { ContentHeaderBox } from './ContentHeaderBox';
 
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
@@ -81,7 +81,7 @@ const ContentsBlock = ({
 
   return (
     <>
-      <ColorBorderBox method={selectedMethod}>
+      <ContentHeaderBox method={selectedMethod}>
         <FormControl sx={{ m: 1, minWidth: 90 }} size="small">
           <InputLabel id="demo-simple-select-autowidth-label">
             <Typography theme={theme}>Method</Typography>
@@ -126,7 +126,7 @@ const ContentsBlock = ({
             <SendIcon fontSize="small" className="sendicon" />
           </StyledButton>
         </div>
-      </ColorBorderBox>
+      </ContentHeaderBox>
       <form
         className="apitest-form"
         id="my-form"
