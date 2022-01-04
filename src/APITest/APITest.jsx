@@ -160,13 +160,16 @@ const APITest = () => {
     }
 
     await request.then(setResponse).catch(function (error) {
+      let response;
       if (error.response) {
-        setResponse(error.response);
-      } else if (error.request) {
-        console.log('Request Error : ', error.request);
+        response = error.response
       } else {
-        console.log('Axios Error : ', error.message);
+        response = {
+          data: error.message,
+          status: "Failed"
+        }
       }
+      setResponse(response);
     });
 
     setIsResponsed(true);
