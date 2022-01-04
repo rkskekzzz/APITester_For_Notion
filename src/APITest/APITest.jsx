@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router';
 import { ContentsBlock, ResultBlock } from './Components';
 import { jsonPrettier } from './Utils/jsonUtils';
@@ -28,8 +28,8 @@ const StyledBox = styled.div`
   flex-direction: column;
   gap: 30px;
 
-  // max-height: 500px;
-  transition: all ease 1s;
+  overflow: hidden;
+  transition: all ease 0.3s;
 
   ${({ method }) => {
     switch (method) {
@@ -45,10 +45,6 @@ const StyledBox = styled.div`
         return `border-color: gray`;
     }
   }};
-
-  // &: hover {
-  //   max-height: 1024px;
-  // }
 `;
 
 const StyledBackground = styled.div`
@@ -76,6 +72,8 @@ const lightTheme = createTheme({
  * APITest
  */
 const APITest = () => {
+  const growingBox = useRef(null);
+  const measuringBox = useRef(null);
   const location = useLocation();
   const queryData = QueryString.parse(location.search, {
     ignoreQueryPrefix: true,
@@ -182,33 +180,41 @@ const APITest = () => {
     if (present === 'onepage') handleSendButton();
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      growingBox.current.style.height = measuringBox.current.clientHeight + "px";
+    }, 10);
+  }, [isResponsed, selectedMethod, formik.values.header, formik.values.body])
+
   return (
     <ThemeProvider theme={mode === 'dark' ? darkTheme : lightTheme}>
       <StyledBackground mode={mode}>
-        <StyledBox method={selectedMethod}>
-          {(!isResponsed || present === 'onepage') && (
-            <ContentsBlock
-              selectedMethod={selectedMethod}
-              handleMethod={handleMethod}
-              handleSendButton={handleSendButton}
-              handleModeButton={handleModeButton}
-              formik={formik}
-              error={error}
-              mode={mode}
-              present={present}
-              isLoading={isLoading}
-            />
-          )}
-          {isResponsed && (
-            <ResultBlock
-              handleBackButton={handleBackButton}
-              formik={formik}
-              response={response}
-              mode={mode}
-              method={selectedMethod}
-              present={present}
-            />
-          )}
+        <StyledBox method={selectedMethod} ref={growingBox}>
+          <div ref={measuringBox}>
+            {(!isResponsed || present === 'onepage') && (
+              <ContentsBlock
+                selectedMethod={selectedMethod}
+                handleMethod={handleMethod}
+                handleSendButton={handleSendButton}
+                handleModeButton={handleModeButton}
+                formik={formik}
+                error={error}
+                mode={mode}
+                present={present}
+                isLoading={isLoading}
+              />
+            )}
+            {isResponsed && (
+              <ResultBlock
+                handleBackButton={handleBackButton}
+                formik={formik}
+                response={response}
+                mode={mode}
+                method={selectedMethod}
+                present={present}
+              />
+            )}
+          </div>
         </StyledBox>
       </StyledBackground>
     </ThemeProvider>
