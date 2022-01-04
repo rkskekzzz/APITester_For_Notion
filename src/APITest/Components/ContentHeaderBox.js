@@ -4,11 +4,11 @@ export const ContentHeaderBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 5px;
+  margin-bottom: 20px;
 
   ${({ method }) => {
-    console.log(method);
     switch (method) {
       case 'GET':
         return `background:  #0000ff20`;

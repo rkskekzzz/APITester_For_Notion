@@ -27,6 +27,10 @@ const StyledBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
+
+  // max-height: 500px;
+  transition: all ease 1s;
+
   ${({ method }) => {
     switch (method) {
       case 'GET':
@@ -41,10 +45,13 @@ const StyledBox = styled.div`
         return `border-color: gray`;
     }
   }};
+
+  // &: hover {
+  //   max-height: 1024px;
+  // }
 `;
 
 const StyledBackground = styled.div`
-  height: 100%;
   color: white;
   padding: 10px;
   ${({ mode }) => {
@@ -178,11 +185,6 @@ const APITest = () => {
   return (
     <ThemeProvider theme={mode === 'dark' ? darkTheme : lightTheme}>
       <StyledBackground mode={mode}>
-        {isLoading && (
-          <div className="loader">
-            <Loader type="Rings" color="#00BFFF" height={200} width={200} />
-          </div>
-        )}
         <StyledBox method={selectedMethod}>
           {(!isResponsed || present === 'onepage') && (
             <ContentsBlock
@@ -194,8 +196,10 @@ const APITest = () => {
               error={error}
               mode={mode}
               present={present}
+              isLoading={isLoading}
             />
           )}
+
           {isResponsed && (
             <ResultBlock
               handleBackButton={handleBackButton}

@@ -1,10 +1,10 @@
 import React from 'react';
 
 import styled from 'styled-components';
-import SendIcon from '@mui/icons-material/Send';
 import ReactJson from 'react-json-view';
 
 import { Typography } from '@mui/material';
+import { BackButton } from './StyledButton';
 import { ContentHeaderBox } from './ContentHeaderBox';
 
 import '../APITest.css';
@@ -12,6 +12,9 @@ import '../APITest.css';
 const StatusSpan = styled.span`
   font-size: 1.3rem;
   font-weight: bold;
+  height: 56px;
+  line-height: 56px;
+  margin: 0 3px;
   ${({ status }) => {
     switch (true) {
       case status >= 400:
@@ -26,19 +29,17 @@ const StatusSpan = styled.span`
   }};
 `;
 
-const StyledBackButton = styled.button`
-  margin: 0 10px;
-  height: 40px;
-  width: 70px;
-  background-color: #c4c4c4;
-  color: black;
-  font-weight: bold;
-  border-radius: 5px;
-  border: 0px solid #5b7ddb;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  cursor: pointer;
+const Triangle = styled.div`
+  width: 0px;
+  height: 0px;
+  border-bottom: calc(8px * 1.732) solid black;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  transform: rotate(90deg);
+  transition: all ease 0.5s;
+  &: hover {
+    transform: rotate(180deg) scale(1.2);
+  }
 `;
 
 const ResultBlock = ({
@@ -50,24 +51,24 @@ const ResultBlock = ({
   present,
 }) => {
   return (
-    <>
+    <div>
       <ContentHeaderBox method={method}>
-        <StatusSpan status={response.status}>[{response.status}]</StatusSpan>
         <Typography
           className="result-header-title"
           color="textPrimary"
           variant="h6"
         >
+          <StatusSpan status={response.status}>[{response.status}]</StatusSpan>
           {formik.values.url}
         </Typography>
         {present !== 'onepage' && (
-          <StyledBackButton
+          <BackButton
+            method={method}
             variant="contained"
-            endicon={<SendIcon />}
             onClick={handleBackButton}
           >
             <span> Back </span>
-          </StyledBackButton>
+          </BackButton>
         )}
       </ContentHeaderBox>
       <div className="result-body">
@@ -92,7 +93,7 @@ const ResultBlock = ({
           </Typography>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

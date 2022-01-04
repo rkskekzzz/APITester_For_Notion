@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import { SendButton } from './StyledButton';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { ContentHeaderBox } from './ContentHeaderBox';
 
@@ -24,38 +24,6 @@ const theme = createTheme({
   },
 });
 
-const StyledButton = styled.button`
-  margin: 0 10px;
-  width: 90px;
-  height: 40px;
-  color: white;
-  font-weight: bold;
-  border-radius: 5px;
-  border: 0px solid white;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  cursor: pointer;
-  ${({ method }) => {
-    switch (method) {
-      case 'GET':
-        return `background-color: blue`;
-      case 'POST':
-        return `background-color: #53a158`;
-      case 'PUT':
-        return `background-color: #d9bc22`;
-      case 'DELETE':
-        return `background-color: red`;
-      default:
-        return `background-color: gray`;
-    }
-  }};
-
-  &: hover {
-    background: #6688dd;
-  }
-`;
-
 const ContentsBlock = ({
   selectedMethod,
   handleMethod,
@@ -65,6 +33,7 @@ const ContentsBlock = ({
   error,
   mode,
   present,
+  isLoading,
 }) => {
   function clipboardText() {
     const method = `method=${selectedMethod}`;
@@ -80,7 +49,7 @@ const ContentsBlock = ({
   }
 
   return (
-    <>
+    <div>
       <ContentHeaderBox method={selectedMethod}>
         <FormControl sx={{ m: 1, minWidth: 90 }} size="small">
           <InputLabel id="demo-simple-select-autowidth-label">
@@ -114,7 +83,17 @@ const ContentsBlock = ({
               <ContentCopyIcon />
             </IconButton>
           </CopyToClipboard>
-          <StyledButton
+          <SendButton
+            onClick={handleSendButton}
+            method={selectedMethod}
+            endIcon={<SendIcon />}
+            loading={isLoading}
+            loadingPosition="end"
+            variant="contained"
+          >
+            Send
+          </SendButton>
+          {/* <StyledButton
             method={selectedMethod}
             variant="contained"
             endicon={<SendIcon />}
@@ -124,7 +103,7 @@ const ContentsBlock = ({
           >
             <span> Send </span>
             <SendIcon fontSize="small" className="sendicon" />
-          </StyledButton>
+          </StyledButton> */}
         </div>
       </ContentHeaderBox>
       <form
@@ -172,7 +151,7 @@ const ContentsBlock = ({
           />
         )}
       </form>
-    </>
+    </div>
   );
 };
 
