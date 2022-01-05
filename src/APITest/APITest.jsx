@@ -10,6 +10,7 @@ import qs from 'qs';
 import { validUrl, validHeader, validBody } from './Utils/validUtils';
 import { ContentsBlock, ResultBlock } from './Components';
 import { jsonPrettier } from './Utils/jsonUtils';
+import AdSense from 'react-adsense';
 
 /**
  * Styled-Components
@@ -208,14 +209,23 @@ const APITest = () => {
               />
             )}
             {isResponsed && (
-              <ResultBlock
-                handleBackButton={handleBackButton}
-                formik={formik}
-                response={response}
-                mode={mode}
-                method={selectedMethod}
-                present={present}
-              />
+              <>
+                <AdSense.Google
+                  style={{ display: 'block' }}
+                  client="ca-pub-7292810486004926"
+                  slot="7806394673"
+                  format="auto"
+                  responsive="true"
+                />
+                <ResultBlock
+                  handleBackButton={handleBackButton}
+                  formik={formik}
+                  response={response}
+                  mode={mode}
+                  method={selectedMethod}
+                  present={present}
+                />
+              </>
             )}
           </FlexBox>
         </StyledBox>
