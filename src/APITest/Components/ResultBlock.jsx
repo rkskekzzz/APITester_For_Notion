@@ -71,7 +71,7 @@ const ResultBlock = ({
           </BackButton>
         )}
       </ContentHeaderBox>
-      <div className="result-body">
+      <>
         {typeof response.data === 'object' ? (
           mode === 'dark' ? (
             <ReactJson
@@ -92,7 +92,7 @@ const ResultBlock = ({
             {response.data}
           </Typography>
         )}
-      </div>
+      </>
     </>
   );
 };

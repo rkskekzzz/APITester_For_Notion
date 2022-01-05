@@ -24,6 +24,13 @@ const ButtonBox = styled.div`
   gap: 10px;
 `;
 
+const InputForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+  gap: 15px;
+`;
+
 const method = ['GET', 'POST', 'PUT', 'DELETE'];
 const theme = createTheme({
   typography: {
@@ -106,11 +113,7 @@ const ContentsBlock = ({
           </SendButton>
         </ButtonBox>
       </ContentHeaderBox>
-      <form
-        className="apitest-form"
-        id="my-form"
-        onSubmit={formik.handleSubmit}
-      >
+      <InputForm id="my-form" onSubmit={formik.handleSubmit}>
         <TextField
           error={error.url ? true : false}
           id="outlined-multiline-flexible url"
@@ -150,7 +153,7 @@ const ContentsBlock = ({
             placeholder="input body"
           />
         )}
-      </form>
+      </InputForm>
     </>
   );
 };
