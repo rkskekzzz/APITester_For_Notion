@@ -11,6 +11,7 @@ import Select from '@mui/material/Select';
 import SendIcon from '@mui/icons-material/Send';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
+import FlipIcon from '@mui/icons-material/Flip';
 import { createTheme } from '@mui/material';
 import { Typography } from '@mui/material';
 import { IconButton } from '@mui/material';
@@ -29,6 +30,7 @@ const ContentsBlock = ({
   handleMethod,
   handleSendButton,
   handleModeButton,
+  handlePresentButton,
   formik,
   error,
   mode,
@@ -49,7 +51,7 @@ const ContentsBlock = ({
   }
 
   return (
-    <div>
+    <>
       <ContentHeaderBox method={selectedMethod}>
         <FormControl sx={{ m: 1, minWidth: 90 }} size="small">
           <InputLabel id="demo-simple-select-autowidth-label">
@@ -75,6 +77,9 @@ const ContentsBlock = ({
           </Select>
         </FormControl>
         <div className="button-box">
+          <IconButton aria-label="present">
+            <FlipIcon onClick={handlePresentButton} />
+          </IconButton>
           <IconButton aria-label="mode">
             <Brightness4Icon onClick={handleModeButton} />
           </IconButton>
@@ -151,7 +156,7 @@ const ContentsBlock = ({
           />
         )}
       </form>
-    </div>
+    </>
   );
 };
 

@@ -51,7 +51,7 @@ const ResultBlock = ({
   present,
 }) => {
   return (
-    <div>
+    <>
       <ContentHeaderBox method={method}>
         <Typography
           className="result-header-title"
@@ -93,7 +93,7 @@ const ResultBlock = ({
           </Typography>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

@@ -6,7 +6,6 @@ export const ContentHeaderBox = styled.div`
   align-items: center;
   border-radius: 10px;
   padding: 5px;
-  margin-bottom: 20px;
 
   ${({ method }) => {
     switch (method) {

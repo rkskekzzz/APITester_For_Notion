@@ -25,10 +25,9 @@ const StyledBox = styled.div`
   border-radius: 15px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
-
   overflow: hidden;
   transition: all ease 0.3s;
+  gap: 30px;
 
   ${({ method }) => {
     switch (method) {
@@ -44,6 +43,12 @@ const StyledBox = styled.div`
         return `border-color: gray`;
     }
   }};
+`;
+
+const FlexBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 `;
 
 const StyledBackground = styled.div`
@@ -84,7 +89,7 @@ const APITest = () => {
   const [selectedMethod, setSelectedMethod] = useState('GET');
   const [mode, setMode] = useState('light');
   const [error, setError] = useState({ url: false, header: false });
-  const present = queryData.present ?? '';
+  const [present, setPresent] = useState(queryData.present ?? '');
 
   const formik = useFormik({
     initialValues: {
@@ -107,6 +112,16 @@ const APITest = () => {
   const handleBackButton = (event) => {
     setIsResponsed(false);
     setResponse({});
+  };
+
+  const handlePresentButton = (event) => {
+    if (present === 'onepage') {
+      setPresent('');
+      setIsResponsed(false);
+    } else {
+      setPresent('onepage');
+      handleSendButton();
+    }
   };
 
   const toggleError = (error) => {
@@ -209,13 +224,14 @@ const APITest = () => {
     <ThemeProvider theme={mode === 'dark' ? darkTheme : lightTheme}>
       <StyledBackground mode={mode}>
         <StyledBox method={selectedMethod} ref={growingBox}>
-          <div ref={measuringBox}>
+          <FlexBox ref={measuringBox}>
             {(!isResponsed || present === 'onepage') && (
               <ContentsBlock
                 selectedMethod={selectedMethod}
                 handleMethod={handleMethod}
                 handleSendButton={handleSendButton}
                 handleModeButton={handleModeButton}
+                handlePresentButton={handlePresentButton}
                 formik={formik}
                 error={error}
                 mode={mode}
@@ -233,7 +249,7 @@ const APITest = () => {
                 present={present}
               />
             )}
-          </div>
+          </FlexBox>
         </StyledBox>
       </StyledBackground>
     </ThemeProvider>
