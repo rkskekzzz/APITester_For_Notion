@@ -91,8 +91,8 @@ const APITest = () => {
   const formik = useFormik({
     initialValues: {
       url: queryData.url,
-      header: jsonPrettier(decodeURI(queryData.header)),
-      body: jsonPrettier(decodeURI(queryData.body)),
+      header: jsonPrettier(queryData.header),
+      body: jsonPrettier(queryData.body),
     },
     onSubmit: () => {},
   });
@@ -100,11 +100,10 @@ const APITest = () => {
   const handleModeButton = (event) => {
     if (mode === 'dark') {
       setMode('light');
-      document.body.style.background = "white";
-    }
-    else {
+      document.body.style.background = 'white';
+    } else {
       setMode('dark');
-      document.body.style.background = "#2f3336";
+      document.body.style.background = '#2f3336';
     }
   };
 
