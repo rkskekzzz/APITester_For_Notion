@@ -19,7 +19,6 @@ APITester_For_Notion은 API 문서를 Notion으로 작성할 때, Notion 내에�
 
 👉 [Notion Link](https://80000coding.notion.site/DDIP-API-v1-631226749606492ea2a039d72b6eb0ee)
 
-
 </br>
 </br>
 
@@ -34,13 +33,14 @@ APITester_For_Notion은 API 문서를 Notion으로 작성할 때, Notion 내에�
 
 # Usage
 
-| props  | optional? | default | value?                                                                                                                                                                                  |
-| ------ | --------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| mode   | optional  | light   | 기본값은 라이트모드, mode 옵션을 통해서 APITester Block의 기본 테마를 지정할 수 있습니다.                                                                                               |
-| method | optional  | get     | 특정 API에서 사용하는 HTTP메소드를 APITester Block의 기본 메서드로 지정할 수 있습니다. 메서드가 설정되어 있지 않다면 Send버튼이 동작하지 않습니다. get, post, put, delete를 제공합니다. |
-| url    | -         | -       | 테스트를 진행하고 싶은 API를 입력합니다, URL이 입력되지 않으면 Send 버튼이 동작하지 않습니다.                                                                                           |
-| body   | optional  | -       | body로 넘길 json형식의 문자열을 입력합니다.                                                                                                                                             |
-| header | optional  | -       | header로 넘길 key=value형식의 문자열을 입력합니다.                                                                                                                                      |
+| props   | optional? | default | value?                                                                                                                                                                                  |
+| ------- | --------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| mode    | optional  | light   | 기본값은 라이트모드, mode 옵션을 통해서 APITester Block의 기본 테마를 지정할 수 있습니다.                                                                                               |
+| method  | optional  | get     | 특정 API에서 사용하는 HTTP메소드를 APITester Block의 기본 메서드로 지정할 수 있습니다. 메서드가 설정되어 있지 않다면 Send버튼이 동작하지 않습니다. get, post, put, delete를 제공합니다. |
+| url     | -         | -       | 테스트를 진행하고 싶은 API를 입력합니다, URL이 입력되지 않으면 Send 버튼이 동작하지 않습니다.                                                                                           |
+| body    | optional  | -       | body로 넘길 json형식의 문자열을 입력합니다.                                                                                                                                             |
+| header  | optional  | -       | header로 넘길 key=value형식의 문자열을 입력합니다.                                                                                                                                      |
+| present | optional  | ''      | 페이지 보여지는 옵션을 설정합니다. 'onepage'는 한 페이지에 API Request와 Response를 동시에 보여주고, 기본값은 각 값들을 전환하면서 보여줍니다. 입력합니다.                              |
 
 </br>
 </br>
@@ -50,6 +50,7 @@ APITester_For_Notion은 API 문서를 Notion으로 작성할 때, Notion 내에�
 ## URL을 만드는 방법
 
 url을 생성하는 방법입니다. 노션에 해당 url을 붙여넣은 후, 임베드 시켜주세요 :)
+
 ![example](./asset/example.png)
 
 ### Method
@@ -86,4 +87,3 @@ https://heyinsa.kr/apitester/?mode=dark&method=get&url=your_api_url&header={"key
 - API
 - React
 - Notion
-
