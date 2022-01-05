@@ -1,18 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router';
+
+import { createTheme, ThemeProvider } from '@mui/material';
+import styled from 'styled-components';
+import { useFormik } from 'formik';
+import axios from 'axios';
+import qs from 'qs';
+
+import { validUrl, validHeader, validBody } from './Utils/validUtils';
 import { ContentsBlock, ResultBlock } from './Components';
 import { jsonPrettier } from './Utils/jsonUtils';
-import { validUrl, validHeader, validBody } from './Utils/validUtils';
-
-import { useFormik } from 'formik';
-import qs from 'qs';
-import axios from 'axios';
-
-import { createTheme } from '@mui/material';
-import { ThemeProvider } from '@mui/material';
-
-import styled from 'styled-components';
-import './APITest.css';
 
 /**
  * Styled-Components
@@ -94,8 +91,8 @@ const APITest = () => {
   const formik = useFormik({
     initialValues: {
       url: queryData.url,
-      header: jsonPrettier(queryData.header),
-      body: jsonPrettier(queryData.body),
+      header: jsonPrettier(decodeURI(queryData.header)),
+      body: jsonPrettier(decodeURI(queryData.body)),
     },
     onSubmit: () => {},
   });
@@ -154,45 +151,12 @@ const APITest = () => {
       return toggleError(e.message);
     }
 
-    switch (selectedMethod) {
-      case 'GET':
-        request = axios({
-          method: 'GET',
-          headers: { 'content-type': 'application/x-www-form-urlencoded' },
-          data: qs.stringify(headers),
-          url,
-        });
-        break;
-      case 'POST':
-        request = axios.post({
-          method: 'POST',
-          headers: { 'content-type': 'application/x-www-form-urlencoded' },
-          data: qs.stringify(headers),
-          body: body,
-          url,
-        });
-        break;
-      case 'PUT':
-        request = axios.put({
-          method: 'PUT',
-          headers: { 'content-type': 'application/x-www-form-urlencoded' },
-          data: qs.stringify(headers),
-          body: body,
-          url,
-        });
-        break;
-      case 'DELETE':
-        request = axios.delete({
-          method: 'DELETE',
-          headers: { 'content-type': 'application/x-www-form-urlencoded' },
-          data: qs.stringify(headers),
-          body: body,
-          url,
-        });
-        break;
-      default:
-        break;
-    }
+    request = axios({
+      method: selectedMethod,
+      headers: headers,
+      body: body,
+      url,
+    });
 
     await request.then(setResponse).catch(function (error) {
       let response;

@@ -29,19 +29,6 @@ const StatusSpan = styled.span`
   }};
 `;
 
-const Triangle = styled.div`
-  width: 0px;
-  height: 0px;
-  border-bottom: calc(8px * 1.732) solid black;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  transform: rotate(90deg);
-  transition: all ease 0.5s;
-  &: hover {
-    transform: rotate(180deg) scale(1.2);
-  }
-`;
-
 const ResultBlock = ({
   handleBackButton,
   formik,

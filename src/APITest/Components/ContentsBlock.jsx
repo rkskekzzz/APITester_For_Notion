@@ -1,23 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SendButton } from './StyledButton';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { ContentHeaderBox } from './ContentHeaderBox';
 
-import TextField from '@mui/material/TextField';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import SendIcon from '@mui/icons-material/Send';
+import FlipIcon from '@mui/icons-material/Flip';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
-import FlipIcon from '@mui/icons-material/Flip';
-import { createTheme } from '@mui/material';
-import { Typography } from '@mui/material';
-import { IconButton } from '@mui/material';
+import {
+  createTheme,
+  Typography,
+  IconButton,
+  TextField,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Select,
+} from '@mui/material';
 
-import '../APITest.css';
+import { SendButton } from './StyledButton';
+import { ContentHeaderBox } from './ContentHeaderBox';
 
 const ButtonBox = styled.div`
   display: flex;
@@ -51,6 +52,7 @@ const ContentsBlock = ({
   isLoading,
 }) => {
   function clipboardText() {
+    console.log('formik.values.body', formik.values.body);
     const method = `method=${selectedMethod}`;
     const url = formik.values.url ? `&url=${formik.values.url}` : '';
     const body = formik.values.body
@@ -59,8 +61,8 @@ const ContentsBlock = ({
     const header = formik.values.header
       ? `&header=${encodeURI(formik.values.header)}`
       : '';
-
-    return `https://heyinsa.kr/apitester?${method}${url}${header}${body}&mode=${mode}`;
+    console.log('.body', body);
+    return `https://heyinsa.kr/apitester?${method}${url}${header}${body}&mode=${mode}&present=${present}`;
   }
 
   return (
