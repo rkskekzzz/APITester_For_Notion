@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { SendButton } from './StyledButton';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { ContentHeaderBox } from './ContentHeaderBox';
@@ -17,6 +18,11 @@ import { Typography } from '@mui/material';
 import { IconButton } from '@mui/material';
 
 import '../APITest.css';
+
+const ButtonBox = styled.div`
+  display: flex;
+  gap: 10px;
+`;
 
 const method = ['GET', 'POST', 'PUT', 'DELETE'];
 const theme = createTheme({
@@ -76,7 +82,7 @@ const ContentsBlock = ({
             })}
           </Select>
         </FormControl>
-        <div className="button-box">
+        <ButtonBox>
           <IconButton aria-label="present">
             <FlipIcon onClick={handlePresentButton} />
           </IconButton>
@@ -96,20 +102,9 @@ const ContentsBlock = ({
             loadingPosition="end"
             variant="contained"
           >
-            Send
+            <span>Send</span>
           </SendButton>
-          {/* <StyledButton
-            method={selectedMethod}
-            variant="contained"
-            endicon={<SendIcon />}
-            form="my-form"
-            type="submit"
-            onClick={handleSendButton}
-          >
-            <span> Send </span>
-            <SendIcon fontSize="small" className="sendicon" />
-          </StyledButton> */}
-        </div>
+        </ButtonBox>
       </ContentHeaderBox>
       <form
         className="apitest-form"
