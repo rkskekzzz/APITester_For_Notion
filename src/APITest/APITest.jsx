@@ -210,13 +210,6 @@ const APITest = () => {
             )}
             {isResponsed && (
               <>
-                <AdSense.Google
-                  style={{ display: 'block' }}
-                  client="ca-pub-7292810486004926"
-                  slot="7806394673"
-                  format="auto"
-                  responsive="true"
-                />
                 <ResultBlock
                   handleBackButton={handleBackButton}
                   formik={formik}
@@ -224,6 +217,13 @@ const APITest = () => {
                   mode={mode}
                   method={selectedMethod}
                   present={present}
+                />
+                <AdSense.Google
+                  style={{ display: 'block' }}
+                  client="ca-pub-3980668446152206"
+                  slot="7464863059"
+                  format="auto"
+                  responsive="true"
                 />
               </>
             )}
