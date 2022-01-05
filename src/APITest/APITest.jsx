@@ -138,7 +138,7 @@ const APITest = () => {
 
   const handleSendButton = async (event) => {
     let url, headers, body;
-    let request;
+    let response;
 
     setIsLoading(true);
 
@@ -150,15 +150,14 @@ const APITest = () => {
       return toggleError(e.message);
     }
 
-    request = axios({
-      method: selectedMethod,
-      headers: headers,
-      body: body,
-      url,
-    });
-
-    await request.then(setResponse).catch(function (error) {
-      let response;
+    try {
+      response = await axios({
+        method: selectedMethod,
+        headers: headers,
+        body: body,
+        url,
+      });
+    } catch (error) {
       if (error.response) {
         response = error.response;
       } else {
@@ -167,9 +166,9 @@ const APITest = () => {
           status: 'Failed',
         };
       }
-      setResponse(response);
-    });
+    }
 
+    setResponse(response);
     setIsResponsed(true);
     setIsLoading(false);
   };
@@ -177,8 +176,10 @@ const APITest = () => {
   useEffect(() => {
     if (queryData.method !== undefined)
       setSelectedMethod(queryData.method.toUpperCase());
+    document.body.style.background = 'white';
     if (queryData.mode !== undefined) setMode(queryData.mode);
     if (present === 'onepage') handleSendButton();
+    if (queryData.mode === 'dark') document.body.style.background = '#2f3336';
   }, []);
 
   useEffect(() => {
@@ -186,7 +187,7 @@ const APITest = () => {
       growingBox.current.style.height =
         measuringBox.current.clientHeight + 'px';
     }, 10);
-  }, [isResponsed, selectedMethod, formik.values.header, formik.values.body]);
+  }, [isLoading, selectedMethod, formik.values.header, formik.values.body]);
 
   return (
     <ThemeProvider theme={mode === 'dark' ? darkTheme : lightTheme}>
