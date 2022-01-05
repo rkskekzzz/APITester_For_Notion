@@ -5,9 +5,8 @@ import { jsonPrettier } from './Utils/jsonUtils';
 import { validUrl, validHeader, validBody } from './Utils/validUtils';
 
 import { useFormik } from 'formik';
-import QueryString from 'qs';
+import qs from 'qs';
 import axios from 'axios';
-import Loader from 'react-loader-spinner';
 
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@mui/material';
@@ -75,7 +74,7 @@ const APITest = () => {
   const growingBox = useRef(null);
   const measuringBox = useRef(null);
   const location = useLocation();
-  const queryData = QueryString.parse(location.search, {
+  const queryData = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
 
@@ -136,23 +135,38 @@ const APITest = () => {
 
     switch (selectedMethod) {
       case 'GET':
-        request = axios.get(url, {
-          headers: headers,
+        request = axios({
+          method: 'GET',
+          headers: { 'content-type': 'application/x-www-form-urlencoded' },
+          data: qs.stringify(headers),
+          url,
         });
         break;
       case 'POST':
-        request = axios.post(url, body, {
-          headers: headers,
+        request = axios.post({
+          method: 'POST',
+          headers: { 'content-type': 'application/x-www-form-urlencoded' },
+          data: qs.stringify(headers),
+          body: body,
+          url,
         });
         break;
       case 'PUT':
-        request = axios.put(url, body, {
-          headers: headers,
+        request = axios.put({
+          method: 'PUT',
+          headers: { 'content-type': 'application/x-www-form-urlencoded' },
+          data: qs.stringify(headers),
+          body: body,
+          url,
         });
         break;
       case 'DELETE':
-        request = axios.delete(url, body, {
-          headers: headers,
+        request = axios.delete({
+          method: 'DELETE',
+          headers: { 'content-type': 'application/x-www-form-urlencoded' },
+          data: qs.stringify(headers),
+          body: body,
+          url,
         });
         break;
       default:
@@ -162,13 +176,14 @@ const APITest = () => {
     await request.then(setResponse).catch(function (error) {
       let response;
       if (error.response) {
-        response = error.response
+        response = error.response;
       } else {
         response = {
           data: error.message,
-          status: "Failed"
-        }
+          status: 'Failed',
+        };
       }
+      console.log(error);
       setResponse(response);
     });
 
@@ -185,9 +200,10 @@ const APITest = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      growingBox.current.style.height = measuringBox.current.clientHeight + "px";
+      growingBox.current.style.height =
+        measuringBox.current.clientHeight + 'px';
     }, 10);
-  }, [isResponsed, selectedMethod, formik.values.header, formik.values.body])
+  }, [isResponsed, selectedMethod, formik.values.header, formik.values.body]);
 
   return (
     <ThemeProvider theme={mode === 'dark' ? darkTheme : lightTheme}>
