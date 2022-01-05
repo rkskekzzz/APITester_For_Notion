@@ -167,7 +167,6 @@ const APITest = () => {
           status: 'Failed',
         };
       }
-      console.log(error);
       setResponse(response);
     });
 

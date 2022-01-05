@@ -52,7 +52,6 @@ const ContentsBlock = ({
   isLoading,
 }) => {
   function clipboardText() {
-    console.log('formik.values.body', formik.values.body);
     const method = `method=${selectedMethod}`;
     const url = formik.values.url ? `&url=${formik.values.url}` : '';
     const body = formik.values.body
@@ -61,7 +60,6 @@ const ContentsBlock = ({
     const header = formik.values.header
       ? `&header=${encodeURI(formik.values.header)}`
       : '';
-    console.log('.body', body);
     return `https://heyinsa.kr/apitester?${method}${url}${header}${body}&mode=${mode}&present=${present}`;
   }
 
