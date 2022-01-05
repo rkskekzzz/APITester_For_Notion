@@ -101,8 +101,14 @@ const APITest = () => {
   });
 
   const handleModeButton = (event) => {
-    if (mode === 'dark') setMode('light');
-    else setMode('dark');
+    if (mode === 'dark') {
+      setMode('light');
+      document.body.style.background = "white";
+    }
+    else {
+      setMode('dark');
+      document.body.style.background = "#2f3336";
+    }
   };
 
   const handleMethod = (event) => {
