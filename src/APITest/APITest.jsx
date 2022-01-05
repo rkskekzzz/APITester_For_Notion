@@ -187,7 +187,13 @@ const APITest = () => {
       growingBox.current.style.height =
         measuringBox.current.clientHeight + 'px';
     }, 10);
-  }, [isLoading, selectedMethod, formik.values.header, formik.values.body]);
+  }, [
+    isLoading,
+    isResponsed,
+    selectedMethod,
+    formik.values.header,
+    formik.values.body,
+  ]);
 
   return (
     <ThemeProvider theme={mode === 'dark' ? darkTheme : lightTheme}>
