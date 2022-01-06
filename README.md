@@ -13,7 +13,7 @@ APITester_For_Notion은 API 문서를 Notion으로 작성할 때, Notion 내에�
 
 아래 링크에서 Demo 버전을 사용해 보세요!
 
-👉 [Demo Link](https://heyinsa.kr/apitester/?method=get&url=test&body=undefined&header=undefined)
+👉 [Demo Link](https://heyinsa.kr/apitester?method=GET&url=https://heyinsa.kr/dueldice/api/users&header=%7B%0A%20%20%22Authorization%22:%20%22Bearer%20test_firebase_jwt%22%0A%7D&mode=light&present=)
 
 아래 링크에서 실제 사용 예시를 확인해 보세요!
 
