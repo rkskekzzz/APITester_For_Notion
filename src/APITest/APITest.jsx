@@ -154,7 +154,7 @@ const APITest = () => {
       response = await axios({
         method: selectedMethod,
         headers: headers,
-        body: body,
+        data: body,
         url,
       });
     } catch (error) {
